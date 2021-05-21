@@ -35,7 +35,7 @@ $config['base_url'] ="http".((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

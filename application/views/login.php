@@ -24,6 +24,14 @@
 
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
+        <?php
+if($this->session->flashdata('success')){?>
+<div class="alert alert-success"><?php echo $this->session->flashdata('success');?></div>
+<?php } else if($this->session->flashdata('error'));{ ?>
+<div class="alert alert=danger"><?php echo $this->session->flashdata('errors');?></div>
+<?php } ?>
+        <?php $attributes = array('class' => 'form-horizontal group-border hover-sripped','method'=>'post');
+        echo form_open('Login/authLogin', $attributes);?>
 
         <div class="form-group has-feedback">
             <input type="text" class="form-control" name="u_email" placeholder="Username">
@@ -50,9 +58,9 @@
         <?php form_close(); ?>
 
 
-        <a href="<?= base_url('users/register') ?>" class="text-center">Register a new membership</a>
+        <a href="<?= base_url('login/register') ?>" class="text-center">Register a new membership</a>
         <hr>
-        <p><strong>Username:</strong> superadmin | <strong>Password:</strong> admin</p>
+        
     </div>
     <!-- /.login-box-body -->
 </div>
