@@ -38,10 +38,10 @@
             <input type="password" class="form-control" name="password" autocomplete="off" placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
-        <div class="form-group has-feedback">
+        <!-- <div class="form-group has-feedback">
             <input type="text" class="form-control" name="email" placeholder="Email">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        </div>
+        </div> -->
         
         <div class="row">
 

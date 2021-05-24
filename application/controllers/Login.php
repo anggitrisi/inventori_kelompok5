@@ -21,18 +21,18 @@ class Login extends CI_controller{
         $username = $this->input->post ('user_name');
         $password = $this->input->post ('password');
                         // echo "<pre>";print_r($_POST);exit;
-        $email = $this->input->post('email');
+        // $email = $this->input->post('email');
         
-        $data = array('EMP_NAME'=>$full_name,'EMP_EMAIL'=>$email);
-        $getInsertedId = $this->UsersModel->create_record('employee_profile',$data);
+        // $data = array('EMP_NAME'=>$full_name,'EMP_EMAIL'=>$email);
+        // $getInsertedId = $this->UsersModel->create_record('employee_profile',$data);
         
         $data = array(
             'FULL_NAME'=>$full_name,
             'USER_NAME'=>$username,
             'U_PASSWORD'=>sha1(md5($password)),
-            'EMP_NO' => $getInsertedId,
+            // 'EMP_NO' => $getInsertedId,
             'GROUP_ID' => 2,
-            'IS_ACTIVE'  => 1
+            'STATUS'  => 1
 
         );
         $response = $this->UsersModel->registerUser($data);
@@ -63,8 +63,15 @@ class Login extends CI_controller{
             } else{
                 redirect(base_url().'Dashboard');
             }
+            
+            }
+            else {
+
+                $this->session->set_flashdata('msg', 'Username Or Password is Invalid');
+                redirect(base_url() . 'login');
+            }
         }
-    }
+
 
     public function logoutUser(){
         $this->session->sess_destroy();

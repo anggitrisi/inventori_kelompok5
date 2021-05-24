@@ -24,12 +24,10 @@
 
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <?php
-if($this->session->flashdata('success')){?>
-<div class="alert alert-success"><?php echo $this->session->flashdata('success');?></div>
-<?php } else if($this->session->flashdata('error'));{ ?>
-<div class="alert alert=danger"><?php echo $this->session->flashdata('errors');?></div>
-<?php } ?>
+        <?php if ($this->session->flashdata('msg')) {
+            echo "<div class='alert alert-danger'>" . $this->session->flashdata('msg') . "</div>";
+        } else {
+        } ?>
         <?php $attributes = array('class' => 'form-horizontal group-border hover-sripped','method'=>'post');
         echo form_open('Login/authLogin', $attributes);?>
 

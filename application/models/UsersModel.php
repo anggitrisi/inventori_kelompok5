@@ -15,7 +15,7 @@ class UsersModel extends CI_Model{
         $this->db->from('usr_user');
         $this->db->where('USER_NAME', $email);
         $this->db->where('U_PASSWORD', $pass);
-        $this->db->where('IS_ACTIVE', '1');
+        $this->db->where('STATUS', '1');
         $query = $this->db->get();
 
         return $query->first_row('array');
@@ -27,13 +27,13 @@ class UsersModel extends CI_Model{
         return $query;
     }
 
-    public function create_record($table,$data){
-        $query = $this->db->insert($table,$data);
-        if($this->db->affected_rows() > 0){
-            return $this->db->insert_id();
-        } else {
-            return FALSE;
-        }
-    }
+    // public function create_record($table,$data){
+    //     $query = $this->db->insert($table,$data);
+    //     if($this->db->affected_rows() > 0){
+    //         return $this->db->insert_id();
+    //     } else {
+    //         return FALSE;
+    //     }
+    // }
 }
 ?>
