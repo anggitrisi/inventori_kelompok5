@@ -1,6 +1,6 @@
 // AdminLTE Gruntfile
 module.exports = function (grunt) { // jshint ignore:line
-  'use strict';
+  'use strict'
 
   grunt.initConfig({
     pkg   : grunt.file.readJSON('package.json'),
@@ -8,11 +8,11 @@ module.exports = function (grunt) { // jshint ignore:line
       less : {
         // Compiles less files upon saving
         files: ['build/less/*.less'],
-        tasks: ['less:development', 'less:production', 'replace', 'notify:less']
+        tasks: ['less:development', 'less:production', 'notify:less']
       },
       js   : {
         // Compile js files upon saving
-        files: ['build/js/*.js'],
+        files: ['build/js/*.js', 'dist/js/app.js'],
         tasks: ['js', 'notify:js']
       },
       skins: {
@@ -112,13 +112,12 @@ module.exports = function (grunt) { // jshint ignore:line
     // Uglify task info. Compress the js files.
     uglify: {
       options   : {
-        mangle : true,
-        output: {
-          comments: 'some'
-        },
+        mangle          : true,
+        preserveComments: 'some'
       },
       production: {
         files: {
+          'dist/js/app.min.js'     : ['dist/js/app.js'],
           'dist/js/adminlte.min.js': ['dist/js/adminlte.js']
         }
       }
@@ -134,8 +133,9 @@ module.exports = function (grunt) { // jshint ignore:line
         + '* should be included in all pages. It controls some layout\n'
         + '* options and implements exclusive AdminLTE plugins.\n'
         + '*\n'
-        + '* @author Colorlib\n'
-        + '* @support <https://github.com/ColorlibHQ/AdminLTE/issues>\n'
+        + '* @Author  Almsaeed Studio\n'
+        + '* @Support <https://www.almsaeedstudio.com>\n'
+        + '* @Email   <abdullah@almsaeedstudio.com>\n'
         + '* @version <%= pkg.version %>\n'
         + '* @repository <%= pkg.repository.url %>\n'
         + '* @license MIT <http://opensource.org/licenses/MIT>\n'
@@ -147,40 +147,15 @@ module.exports = function (grunt) { // jshint ignore:line
       },
       dist   : {
         src : [
-          'build/js/BoxRefresh.js',
-          'build/js/BoxWidget.js',
-          'build/js/ControlSidebar.js',
-          'build/js/DirectChat.js',
-          'build/js/PushMenu.js',
-          'build/js/TodoList.js',
-          'build/js/Tree.js',
           'build/js/Layout.js',
+          'build/js/PushMenu.js',
+          'build/js/Tree.js',
+          'build/js/ControlSidebar.js',
+          'build/js/BoxWidget.js',
+          'build/js/TodoList.js',
+          'build/js/DirectChat.js'
         ],
         dest: 'dist/js/adminlte.js'
-      }
-    },
-
-    // Replace image paths in AdminLTE without plugins
-    replace: {
-      withoutPlugins   : {
-        src         : ['dist/css/alt/AdminLTE-without-plugins.css'],
-        dest        : 'dist/css/alt/AdminLTE-without-plugins.css',
-        replacements: [
-          {
-            from: '../img',
-            to  : '../../img'
-          }
-        ]
-      },
-      withoutPluginsMin: {
-        src         : ['dist/css/alt/AdminLTE-without-plugins.min.css'],
-        dest        : 'dist/css/alt/AdminLTE-without-plugins.min.css',
-        replacements: [
-          {
-            from: '../img',
-            to  : '../../img'
-          }
-        ]
       }
     },
 
@@ -270,43 +245,39 @@ module.exports = function (grunt) { // jshint ignore:line
     clean: {
       build: ['build/img/*']
     }
-  });
+  })
 
   // Load all grunt tasks
 
   // LESS Compiler
-  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-less')
   // Watch File Changes
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-watch')
   // Compress JS Files
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify')
   // Include Files Within HTML
-  grunt.loadNpmTasks('grunt-includes');
+  grunt.loadNpmTasks('grunt-includes')
   // Optimize images
-  grunt.loadNpmTasks('grunt-image');
+  grunt.loadNpmTasks('grunt-image')
   // Validate JS code
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-contrib-jshint')
+  grunt.loadNpmTasks('grunt-jscs')
   // Delete not needed files
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-clean')
   // Lint CSS
-  grunt.loadNpmTasks('grunt-contrib-csslint');
+  grunt.loadNpmTasks('grunt-contrib-csslint')
   // Lint Bootstrap
-  grunt.loadNpmTasks('grunt-bootlint');
+  grunt.loadNpmTasks('grunt-bootlint')
   // Concatenate JS files
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-concat')
   // Notify
-  grunt.loadNpmTasks('grunt-notify');
-  // Replace
-  grunt.loadNpmTasks('grunt-text-replace');
+  grunt.loadNpmTasks('grunt-notify')
 
   // Linting task
-  grunt.registerTask('lint', ['jshint', 'csslint', 'bootlint']);
+  grunt.registerTask('lint', ['jshint', 'csslint', 'bootlint'])
   // JS task
-  grunt.registerTask('js', ['concat', 'uglify']);
-  // CSS Task
-  grunt.registerTask('css', ['less:development', 'less:production', 'replace']);
+  grunt.registerTask('js', ['concat', 'uglify'])
 
   // The default task (running 'grunt' in console) is 'watch'
-  grunt.registerTask('default', ['watch']);
-};
+  grunt.registerTask('default', ['watch'])
+}
