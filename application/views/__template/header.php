@@ -164,7 +164,7 @@
                                             <?php } else { ?>
                                             <li class="nav-item">
                                             <?php } ?>
-                                            <a href="<?php echo base_url() . "generals/getpage/" . $val->MENU_ID; ?>" class="nav-link ">
+                                            <a href="<?php echo base_url() . "General/getpage/" . $val->MENU_ID; ?>" class="nav-link ">
                                                 <span class="title"><?php echo $val->MENU_TEXT; ?></span>
                                             </a>
                                             </li>

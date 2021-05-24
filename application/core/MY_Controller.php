@@ -6,6 +6,15 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Menus');
+        if ($this->session->userdata('user_id')) {
+        } else {
+            redirect(base_url());
+        }
+        $this->load->model('Main_model');
+        if ($this->session->userdata('user_id')) {
+        } else {
+            redirect(base_url());
+        }
     }
     public function header($title)
     {
