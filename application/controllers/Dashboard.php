@@ -8,7 +8,7 @@ class Dashboard extends MY_Controller{
 
     public function index()
     {
-        $this->header();
+        $this->header('Dashboard');
         $this->load->view('__template/main');
         $this->footer();
     }
