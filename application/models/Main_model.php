@@ -107,11 +107,55 @@ class Main_model extends CI_Model
                 ->FROM('barang AS b,kategori as k')
                 ->where('b.id_kategori = k.id_kategori')
                 ->get();
+          
+              return $sql->result();
+        }
+    
+    }
+
+    public function ubahaktifpegawai($id, $status)
+    {
+        $atur = array(
+            'STATUS' => $status
+        );
+
+        $this->db->where('EMP_ID', $id);
+        $this->db->update('pegawai', $atur);
+    }
+
+    public function ubahaktifpetugas($id, $status)
+    {
+        $atur = array(
+            'STATUS' => $status
+        );
+
+        $this->db->where('id_petugas', $id);
+        $this->db->update('petugas', $atur);
+    }
+
+    public function ubahaktifsupplier($id, $status)
+    {
+        $atur = array(
+            'STATUS' => $status
+        );
+
+        $this->db->where('id_supplier', $id);
+        $this->db->update('supplier', $atur);
+    }
+
+    public function group_id()
+    {
+        {
+            $sql = $this->db->select("*")
+                ->FROM('petugas AS p, usr_group as g')
+                ->where('p.GROUP_ID = g.GROUP_ID')
+                ->get();
     
             return $sql->result();
         }
     
     }
+
 
     public function insertData($gambar)
 	{
@@ -141,7 +185,7 @@ class Main_model extends CI_Model
 		return "default.jpg";
 	}
 
-    public function getUserById($id_barang) {
+    public function getUserById_barang($id_barang) {
 			
 		return $this->db->get_where('barang', ['id_barang' => $id_barang ])->row_array();
 
@@ -199,4 +243,11 @@ class Main_model extends CI_Model
       else
           return false;
   }
+
+    public function getUserById($id_petugas) {
+			
+		return $this->db->get_where('petugas', ['id_petugas' => $id_petugas ])->row_array();
+
+	}
+
 }
