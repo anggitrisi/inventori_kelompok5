@@ -161,7 +161,7 @@ class Main_model extends CI_Model
     $this->db->join('petugas as petugas_peminta', 'petugas_peminta.USER_ID = pengadaan.USER_ID');
     //left outer join perlu karena tidak semua barang yang diminta untuk diadakan sudah disetujui
     $this->db->join('petugas as petugas_penyetuju', 'petugas_penyetuju.USER_ID = pengadaan.disetujui_oleh', 'left');
-    $this->db->having('status', 1);
+    $this->db->having('pengadaan.status', 1);
     $query = $this->db->get();
     return $query->result();
   }
