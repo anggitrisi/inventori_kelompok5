@@ -71,4 +71,26 @@ class Main_model extends CI_Model
 
     return $result = $query->result();
   }
+
+  //get user details
+  public function getUserDetails($user_id)
+  {
+    $this->db->select("e.nama_petugas,e.no_telepon,e.gambar_petugas,g.GROUP_NAME as jabatan");
+    $this->db->from('petugas as e, usr_user as u', 'usr_group as g');
+    $this->db->join('usr_group as g', 'g.GROUP_ID = u.GROUP_ID');
+    $this->db->where('u.USER_ID = e.USER_ID');
+    $this->db->where('u.GROUP_ID   = g.GROUP_ID ');
+    $this->db->where('u.USER_ID', $user_id);
+    $query = $this->db->get();
+    return $query->row();
+  }
+
+  public function create_record($data, $tbl)
+  {
+
+
+    $this->db->set($data);
+
+    $this->db->insert($tbl);
+  }
 }

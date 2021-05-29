@@ -1,15 +1,18 @@
 <?php
-class UsersModel extends CI_Model{
-    function registerUser($data){
+class UsersModel extends CI_Model
+{
+    function registerUser($data)
+    {
         $this->db->insert('usr_user', $data);
-        if($response){
+        if ($response) {
             return 1;
         } else {
             return 0;
         }
     }
 
-    public function authenticateUser($email, $password){
+    public function authenticateUser($email, $password)
+    {
         $pass = sha1(md5($password));
         $this->db->select("*");
         $this->db->from('usr_user');
@@ -23,17 +26,26 @@ class UsersModel extends CI_Model{
 
     public function getLoggedInUserGroup($group_id)
     {
-        $this->db->select('GROUP_NAME')->from('usr_group')->where('GROUP_ID',$group_id)->get()->row_array();
+        $this->db->select('GROUP_NAME')->from('usr_group')->where('GROUP_ID', $group_id)->get()->row_array();
         return $query;
     }
 
-    // public function create_record($table,$data){
-    //     $query = $this->db->insert($table,$data);
-    //     if($this->db->affected_rows() > 0){
+    //logout
+    public function logout()
+    {
+
+        $this->session->sess_destroy();
+
+        redirect(base_url());
+    }
+
+    // public function create_record($table, $data)
+    // {
+    //     $query = $this->db->insert($table, $data);
+    //     if ($this->db->affected_rows() > 0) {
     //         return $this->db->insert_id();
     //     } else {
     //         return FALSE;
     //     }
     // }
 }
-?>

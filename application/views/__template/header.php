@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title><?=$title ?></title>
+    <title><?= $title ?></title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -36,6 +36,10 @@
     <!-- jQuery 3 -->
     <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/toastr.js"> </script>
+
+    <!-- Load File Jquery -->
+    <script src="<?php echo base_url("js/jquery.min.js"); ?>" type="text/javascript"></script>
+
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -78,10 +82,8 @@
                                     <h4 style="color: #ffffff">
                                         <?= $this->session->userdata('username') ?> </h4>
                                     <h6 style="color: #ffffff"></h6>
-
                                     <p>
-                                        <?php echo $this->session->userdata('employee'); ?>
-
+                                        <?php echo $this->session->userdata('jabatan'); ?>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -184,6 +186,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                <?php $MY_Controller->Getsave_up_delPermissions(); ?>
 
                 <h1>
 
@@ -193,7 +196,6 @@
                 <ol class="breadcrumb">
 
                     <?php
-
 
                     $url = str_replace("/", "", "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 
