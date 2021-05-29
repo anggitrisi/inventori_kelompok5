@@ -82,7 +82,7 @@ class Barang extends MY_Controller
 }
 public function edit_barang($id_barang){
     $data['item'] = $this->Main_model->item_cat();
-    $data['result'] = $this->Main_model->getUserById($id_barang);
+    $data['result'] = $this->Main_model->getUserById_barang($id_barang);
     // $data['edit_barang'] = $this->Main_model->select('kategori');
     
     $data['edit_barang'] = $this->Main_model->single_record('barang', array('id_barang'=>$id_barang));
