@@ -35,7 +35,11 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <strong><i class="fa fa-phone margin-r-5"></i> Fakultas</strong>
+                    <strong><i class="fa fa-location-arrow"></i> Fakultas</strong>
+                    <p class="text-muted"> <?php if(empty($empDetail)){
+                            echo "<span>NO record</span>";
+                        }else{
+                            echo $empDetail->fakultas;} ?>a</p>
                     <hr>
 
                 </div>
