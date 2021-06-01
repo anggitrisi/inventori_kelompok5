@@ -126,10 +126,68 @@ class User extends MY_Controller
   public function detail_user($id)
   {
     $data['userDetail'] = $this->Main_model->getUserDetails($id);
-    var_dump($data['userDetail']);
 
     $this->header('Detail user');
     $this->load->view('users/detail_user', $data);
     $this->footer();
+  }
+
+
+  /// batasssss untuk naomi
+
+  // List Categories
+  public function grup_user()
+  {
+    $data['grup_user'] = $this->Main_model->get_record('usr_group');
+    $data['kategori'] = $this->Main_model->select_record('kategori');
+
+
+    // var_dump($data['grup_user']);
+
+    // var_dump($data['kategori']);
+
+    $this->header('Grup User');
+    $this->load->view('users/data_grup_user', $data);
+    $this->footer();
+  }
+
+  public function insert_grup_user()
+  {
+    $data = array(
+      'GROUP_NAME' => $this->input->post('GROUP_NAME')
+    );
+    $response = $this->Main_model->save_record('usr_group', $data);
+    if ($response == TRUE) {
+      $this->session->set_flashdata('success', 'Data Grup User Berhasil Ditambahkan');
+      redirect(base_url() . 'user/grup_user');
+    }
+  }
+
+  public function update_grup_user()
+  {
+    $GROUP_ID = $this->input->post('GROUP_ID');
+
+    $data = array(
+      'GROUP_NAME' => $this->input->post('GROUP_NAME'),
+    );
+    $where = array('GROUP_ID' => $GROUP_ID);
+    $this->load->model('Main_model');
+    $response = $this->Main_model->update_record('usr_group', $data, $where);
+    if ($response) {
+      $this->session->set_flashdata('info', 'Record Updated Successfully..!');
+      redirect(base_url() . 'user/data_grup_user');
+    }
+  }
+
+  public function hapus_grup_user($id)
+  {
+    $response = $this->Main_model->delete_record('usr_group', 'GROUP_ID', $id);
+    if ($response == TRUE) {
+      $this->session->set_flashdata('warning', "Data Group User Berhasil Dihapus");
+      redirect(base_url() . 'user/grup_user');
+    } else {
+      $this->session->set_flashdata('error', "Something Went Wrong");
+      redirect(base_url() . 'user/grup_user');
+    }
   }
 }

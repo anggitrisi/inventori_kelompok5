@@ -523,4 +523,12 @@ class Main_model extends CI_Model
     $this->db->where('USER_ID', $id);
     $this->db->update('usr_user', $atur);
   }
+
+  public function get_record($table)
+  {
+    $this->db->select('usr_group.GROUP_ID, usr_group.GROUP_NAME');
+    $this->db->from($table);
+    $query = $this->db->get();
+    return $query->result();
+  }
 }
