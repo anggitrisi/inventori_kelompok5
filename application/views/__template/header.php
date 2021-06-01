@@ -45,12 +45,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-purple">
+<body class="hold-transition skin-black-light">
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<?= base_url() ?>index.php/dashboard" class="logo">
+            <a href="<?= base_url() ?>dashboard" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>SI</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -114,7 +114,8 @@
                         <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?php echo $this->session->userdata('employee'); ?></p>
+                        <p><?php echo $this->session->userdata('username'); ?></p>
+                        <p><?php echo $this->session->userdata('jabatan'); ?></p>
                     </div>
                 </div>
 
@@ -200,7 +201,7 @@
                     $url = str_replace("/", "", "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 
                     $url_1 = str_replace("/", "", base_url() . "dashboard/");
-                    $url_2 = str_replace("/", "", base_url() . "index.php/dashboard/");
+                    $url_2 = str_replace("/", "", base_url() . "dashboard/");
                     $url_3 = str_replace("/", "", base_url());
                     $url_4 = str_replace("/", "", base_url() . "index.php");
 
