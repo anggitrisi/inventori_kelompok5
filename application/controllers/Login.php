@@ -5,6 +5,7 @@ class Login extends CI_controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('UsersModel');
     }
     public function index()
     {
@@ -22,19 +23,21 @@ class Login extends CI_controller
         $full_name = $this->input->post('full_name');
         $username = $this->input->post('user_name');
         $password = $this->input->post('password');
+        $dt = date("Y-m-d H:i:s");
         // echo "<pre>";print_r($_POST);exit;
-        $email = $this->input->post('email');
+        // $email = $this->input->post('email');
 
-        $data = array('EMP_NAME' => $full_name, 'EMP_EMAIL' => $email);
-        $getInsertedId = $this->UsersModel->create_record('employee_profile', $data);
+        // $data = array('EMP_NAME' => $full_name, 'EMP_EMAIL' => $email);
+        // $getInsertedId = $this->UsersModel->create_record('employee_profile', $data);
 
         $data = array(
             'FULL_NAME' => $full_name,
             'USER_NAME' => $username,
             'U_PASSWORD' => sha1(md5($password)),
-            'EMP_NO' => $getInsertedId,
+            // 'EMP_NO' => $getInsertedId,
+            "CREATED_DATE" => $dt,
             'GROUP_ID' => 2,
-            'IS_ACTIVE'  => 1
+            'STATUS'  => 1
 
         );
         $response = $this->UsersModel->registerUser($data);
