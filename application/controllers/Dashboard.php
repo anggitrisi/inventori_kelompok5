@@ -33,8 +33,18 @@ class Dashboard extends MY_Controller
         $data['jumlah_barang_masuk_bulan_ini'] = $this->Main_model->sum_all_masuk_item_bulan_ini();
         $data['jumlah_barang_keluar_bulan_ini'] = $this->Main_model->sum_all_keluar_item_bulan_ini();
 
-        $this->header('Dashboard');
-        $this->load->view('__template/dashboard_admin', $data);
-        $this->footer();
+        if ($this->session->userdata('group_id') == 1) {
+            $this->header('Dashboard');
+            $this->load->view('__template/dashboard_admin', $data);
+            $this->footer();
+        } elseif ($this->session->userdata('group_id') == 2) {
+            $this->header('Dashboard');
+            $this->load->view('__template/dashboard_manager', $data);
+            $this->footer();
+        } else {
+            $this->header('Dashboard');
+            $this->load->view('__template/dashboard_petugas', $data);
+            $this->footer();
+        }
     }
 }
