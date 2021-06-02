@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <div class="box box-primary">
+      <div class="box box">
         <div class="box-body box-profile">
 
           <h3 class="profile-username text-center"><?php echo $detail_pengadaan->id_pengadaan; ?></h3>
@@ -32,7 +32,7 @@
 
     <div class="col-md-8">
       <!-- Detail Pengajuan Permintaan Box -->
-      <div class="box box-primary">
+      <div class="box box">
         <div class="box-header with-border">
           <h3 class="box-title">Detail Pengajuan Permintaan</h3>
           <div class="text-right">
@@ -51,21 +51,33 @@
                   echo $detail_pengadaan->petugas_peminta;
                 } ?>
               </p>
-              <p class="text-muted ml"><?php echo $detail_pengadaan->no_telpPetugasPenyetuju; ?></a></p>
-              <p class="text-muted ml"><?php echo $detail_pengadaan->alamatPetugasPenyetuju; ?></a></p>
             </div>
-            <div class="col-sm-4 mx-auto pull-right">
-              <strong><i class="fa fa-user"></i> Disetujui oleh</strong>
-              <p class="text-muted ml">
-                <?php if ($detail_pengadaan->disetujui_oleh == 0) {
-                  echo "<span>(Belum disetujui)</span>";
-                } else {
-                  echo $detail_pengadaan->petugas_penyetuju;
-                } ?>
-              </p>
-              <p class="text-muted ml"><?php echo $detail_pengadaan->no_telpPetugasPenyetuju; ?></a></p>
-              <p class="text-muted ml"><?php echo $detail_pengadaan->alamatPetugasPenyetuju; ?></a></p>
-            </div>
+
+            <?php if ($detail_pengadaan->status == 0) : ?>
+              <div class="col-sm-4 mx-auto pull-right">
+
+                <p class="text-muted ml">
+                  <span>Belum disetujui</span>
+                </p>
+
+              </div>
+
+            <?php elseif ($detail_pengadaan->status == 1) : ?>
+              <div class="col-sm-4 mx-auto pull-right">
+                <strong><i class="fa fa-user"></i> Disetujui oleh</strong>
+                <br>
+                <p class="text-muted ml"><?php echo $detail_pengadaan->petugas_penyetuju; ?></p>
+              </div>
+
+            <?php elseif ($detail_pengadaan->status == 2) : ?>
+              <div class="col-sm-4 mx-auto pull-right">
+                <strong><i class="fa fa-user"></i> Ditolak oleh</strong>
+                <p class="text-muted ml">
+                  <?php echo $detail_pengadaan->petugas_penyetuju; ?>
+                </p>
+              </div>
+
+            <?php endif ?>
 
           </div>
           <hr>

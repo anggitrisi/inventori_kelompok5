@@ -32,7 +32,7 @@
               <div id="invoice">
                 <div class="date">Tanggal invoice: <?php echo date('d M Y', strtotime($detail_pengadaan->tgl_masuk)); ?></div>
                 <div class="date">Invoice Status <?php if ($detail_pengadaan->_dibayar == 1) {
-                                                    echo "<span class='label label-primary'>PAID</span>";
+                                                    echo "<span class='label label-success'>PAID</span>";
                                                   } else {
                                                     echo "<span class='label label-warning'>NOT PAID</span>";
                                                   }
@@ -50,6 +50,7 @@
                     <th> Item</th>
                     <th class="hidden-xs"> Jumlah</th>
                     <th class="hidden-xs"> Harga</th>
+                    <th class="hidden-xs"> qrcode</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -73,8 +74,9 @@
             <div class="col-xs-4">
               <div class="well">
                 <address>
+                  <p><strong>Di <i>request</i> oleh &nbsp : </strong><?= $detail_pengadaan->petugas_peminta; ?></p>
                   <p><strong>Disetujui oleh &nbsp : </strong><?= $detail_pengadaan->petugas_penyetuju; ?></p>
-                  <p><strong>Petugas penanggungjawab &nbsp : </strong><?= $detail_pengadaan->petugas_penyetuju; ?></p>
+                  <p><strong>Diterima oleh &nbsp : </strong><?= $detail_pengadaan->petugas_pembayar; ?></p>
                 </address>
               </div>
             </div>

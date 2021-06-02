@@ -36,12 +36,12 @@
         <div class="form-group">
           <div class="col-sm-6"><label for="date">Tanggal</label>
             <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-            <input type="date" name="date" id="date" class="form-control" value="<?= set_value('date'); ?>">
+            <input type="date" name="date" id="date" class="form-control" value="<?= set_value('date'); ?>" required>
           </div>
         </div>
 
         <div class="form-group">
-          <div class="col-sm-6"><label>Lokasi</label><select class="form-control" id="id_lokasi" name="id_lokasi">
+          <div class="col-sm-6"><label>Lokasi</label><select class="form-control" id="id_lokasi" name="id_lokasi" required>
               <option value="">pilih..</option>
               <?php foreach ($lokasi as $lks) : ?>
                 <option value="<?php echo $lks->id_lokasi; ?>"> <?php echo $lks->nama_lokasi; ?>, <?php echo $lks->fakultas; ?></option>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-6"><label>Pegawai Penganggung Jawab</label><select class="form-control" id="EMP_ID" name="EMP_ID">
+          <div class="col-sm-6"><label>Pegawai Penganggung Jawab</label><select class="form-control" id="EMP_ID" name="EMP_ID" required>
               <option value="">pilih..</option>
               <?php foreach ($pegawai as $spl) : ?>
                 <option value="<?php echo $spl->EMP_ID; ?>"> <?php echo $spl->EMP_NAME; ?></option>
@@ -62,7 +62,7 @@
         <div class="form-group fieldGroup">
           <div class="input-group">
             <div class="col-sm-6"><label>Barang</label>
-              <select class="form-control" id="id_barang[]" name="id_barang[]">
+              <select class="form-control" id="id_barang[]" name="id_barang[]" required>
                 <option value="">pilih..</option>
                 <?php foreach ($barang as $brg) : ?>
                   <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?></option>

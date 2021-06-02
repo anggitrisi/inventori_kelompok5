@@ -111,4 +111,30 @@ class penempatan extends MY_Controller
     $this->load->view('penempatan/detail_penempatan', $data);
     $this->footer();
   }
+
+  public function selesaikan_penempatan($id)
+  {
+    $diselesaikan_oleh = $this->session->userdata('user_id');
+    $_diselesaikan = 1;
+    $data = array(
+      'diselesaikan_oleh' => $diselesaikan_oleh,
+      '_diselesaikan' => $_diselesaikan,
+      'tgl_ditempatkan' => date("Y-m-d H:i:s"),
+
+    );
+
+    // tabel penempatan di update
+    $where = array('id_penempatan' => $id);
+    $response = $this->Main_model->update_record('penempatan', $data, $where);
+
+    // row tabel permintan_penempatan_item masuk ke tabel keluar_item
+    $this->Main_model->insert_keluar_item($id);
+    if ($response == TRUE) {
+      $this->session->set_flashdata('success', "Penempatan ini sudah diselesaikan! Data barang telah diupdate");
+      redirect(base_url() . 'penempatan/data_penempatan');
+    } else {
+      $this->session->set_flashdata('error', "Something went wrong");
+    }
+    redirect(base_url() . 'penempatan/data_penempatan');
+  }
 }

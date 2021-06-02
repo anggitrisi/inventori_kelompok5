@@ -109,7 +109,7 @@ class Main_model extends CI_Model
   */
   public function get_detail_pengadaan($id)
   {
-    $this->db->select('pengadaan.*,supplier.nama_supplier,supplier.nama_perusahaan,supplier.email,supplier.no_telp as no_telpSupplier,supplier.alamat as alamatSupplier,petugas_peminta.nama_petugas as petugas_peminta,petugas_peminta.no_telepon as no_telpPetugasPeminta,petugas_peminta.alamat as alamatPetugasPeminta,petugas_penyetuju.nama_petugas as petugas_penyetuju,petugas_penyetuju.no_telepon as no_telpPetugasPenyetuju,petugas_penyetuju.alamat as alamatPetugasPenyetuju');
+    $this->db->select('pengadaan.*,supplier.nama_supplier,supplier.nama_perusahaan,supplier.email,supplier.no_telp as no_telpSupplier,supplier.alamat as alamatSupplier,petugas_peminta.nama_petugas as petugas_peminta,petugas_peminta.no_telepon as no_telpPetugasPeminta,petugas_peminta.alamat as alamatPetugasPeminta,petugas_penyetuju.nama_petugas as petugas_penyetuju,petugas_penyetuju.no_telepon as no_telpPetugasPenyetuju,petugas_penyetuju.alamat as alamatPetugasPenyetuju, petugas_pembayar.nama_petugas as petugas_pembayar');
     $this->db->from('pengadaan');
     $this->db->join('supplier', 'supplier.id_supplier = pengadaan.id_supplier', 'left');
     $this->db->join('petugas as petugas_peminta', 'petugas_peminta.USER_ID = pengadaan.USER_ID', 'left');
@@ -128,7 +128,7 @@ class Main_model extends CI_Model
   */
   public function get_detail_pengadaan_item($id)
   {
-    $this->db->select('*');
+    $this->db->select('permintaan_pengadaan_item.*,barang.nama_barang,barang.jumlah as stok');
     $this->db->from('permintaan_pengadaan_item');
     $this->db->join('barang', 'barang.id_barang = permintaan_pengadaan_item.id_barang');
     $this->db->having('id_pengadaan', $id);
@@ -140,6 +140,7 @@ class Main_model extends CI_Model
   public function delete_pengadaan($id)
   {
     $this->db->where('id_pengadaan', $id);
+    $this->db->where('status', 2);
     $this->db->delete('pengadaan');
   }
 
@@ -188,12 +189,13 @@ class Main_model extends CI_Model
 
   public function get_detail_penempatan($id)
   {
-    $this->db->select('penempatan.*,lokasi.*,petugas_peminta.nama_petugas as petugas_peminta,petugas_peminta.no_telepon as no_telpPetugasPeminta,petugas_peminta.alamat as alamatPetugasPeminta,petugas_penyetuju.nama_petugas as petugas_penyetuju,petugas_penyetuju.no_telepon as no_telpPetugasPenyetuju, petugas_penyetuju.alamat as alamatPetugasPenyetuju, penanggung_jawab.*');
+    $this->db->select('penempatan.*,lokasi.*,petugas_peminta.nama_petugas as petugas_peminta,petugas_peminta.no_telepon as no_telpPetugasPeminta,petugas_peminta.alamat as alamatPetugasPeminta,petugas_penyetuju.nama_petugas as petugas_penyetuju,petugas_penyetuju.no_telepon as no_telpPetugasPenyetuju, petugas_penyetuju.alamat as alamatPetugasPenyetuju, penanggung_jawab.*,petugas_penyelesai.nama_petugas as petugas_penyelesai');
     $this->db->from('penempatan');
     $this->db->join('lokasi', 'lokasi.id_lokasi = penempatan.id_lokasi', 'left');
     $this->db->join('petugas as petugas_peminta', 'petugas_peminta.USER_ID = penempatan.USER_ID', 'left');
     //left outer join perlu karena tidak semua barang yang diminta untuk diadakan sudah disetujui
     $this->db->join('petugas as petugas_penyetuju', 'petugas_penyetuju.USER_ID = penempatan.disetujui_oleh', 'left');
+    $this->db->join('petugas as petugas_penyelesai', 'petugas_penyelesai.USER_ID = penempatan.diselesaikan_oleh', 'left');
     $this->db->join('pegawai as penanggung_jawab', 'penanggung_jawab.EMP_ID = penempatan.pegawai_penanggung_jawab', 'left');
     $this->db->where('id_penempatan', $id);
     $query = $this->db->get();
@@ -206,9 +208,11 @@ class Main_model extends CI_Model
   */
   public function get_detail_penempatan_item($id)
   {
-    $this->db->select('*');
+    $this->db->select('permintaan_penempatan_item.*,barang.nama_barang,barang.merek,barang.gambar,barang.keterangan,barang.qrcode,kategori.nama_kategori');
     $this->db->from('permintaan_penempatan_item');
     $this->db->join('barang', 'barang.id_barang = permintaan_penempatan_item.id_barang');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');
+
     $this->db->having('id_penempatan', $id);
     $query = $this->db->get();
     return $query->result();
@@ -487,5 +491,27 @@ class Main_model extends CI_Model
     $this->db->where('DATE(tgl_permintaan_penempatan) = CURDATE() or DATE(tgl_disetujui)');
     $query = $this->db->get();
     return $query->result();
+  }
+
+  public function insert_masuk_item($id)
+  {
+    $sql = "INSERT INTO masuk_item (`id_pengadaan`,`id_barang`,`jumlah_masuk`,`harga`)  
+            SELECT `id_pengadaan`,`id_barang`,`jumlah`,`harga`
+            FROM `permintaan_pengadaan_item`
+            WHERE `id_pengadaan` = '$id'
+            ";
+    $this->db->query($sql);
+    return TRUE;
+  }
+
+  public function insert_keluar_item($id)
+  {
+    $sql = "INSERT INTO keluar_item (`id_penempatan`,`id_barang`,`jumlah_keluar`)  
+            SELECT `id_penempatan`,`id_barang`,`jumlah`
+            FROM `permintaan_penempatan_item`
+            WHERE `id_penempatan` = '$id'
+            ";
+    $this->db->query($sql);
+    return TRUE;
   }
 }

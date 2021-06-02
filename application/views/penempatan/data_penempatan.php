@@ -36,25 +36,25 @@
                     <br><?= $pgd->fakultas; ?>
                   </td>
                   <td><?php if ($pgd->status == 0) : ?>
-                      <a href="#" class="btn btn-warning disabled">
+                      <a href="#" class="label label-warning">
                         <span class="icon text-white-50">
                           <i class="fa fa-hourglass-half"></i>
                         </span>
-                        <span class="text">Waiting</span>
+                        <span class="text">Pending</span>
                       </a>
                     <?php elseif ($pgd->status == 1) : ?>
-                      <a href="#" class="btn btn-success disabled">
+                      <a href="#" class="label label-success">
                         <span class="icon text-white-50">
                           <i class="fa fa-check"></i>
                         </span>
-                        <span class="text">Accepted</span>
+                        <span class="text">DIterima</span>
                       </a>
                     <?php else : ?>
-                      <a href="#" class="btn btn-danger disabled">
+                      <a href="#" class="label label-danger">
                         <span class="icon text-white-50">
                           <i class="fa fa-close"></i>
                         </span>
-                        <span class="text">Canceled</span>
+                        <span class="text">Ditolak</span>
                       </a>
                     <?php endif; ?>
                   </td>
@@ -62,23 +62,33 @@
                   <td>
                     <!-- kalau belum diterima atau ditolak manager tidak bisa diproses-->
                     <!-- atau kalo sudah diterima dan sudah diproses tidak bisa lagi diproses-->
-                    <?php if (($pgd->status == 0 || $pgd->status == 2) || ($pgd->status == 1 || $pgd->di_proses == 1)) : ?>
-                      <a href="#" class="btn btn-default disabled">
-                        <span class="icon text-white-50">
-                          <i class="fa fa-circle-o-notch"></i>
-                        </span>
-                        <span class="text">Proses</span>
-                      </a>
-                    <?php endif; ?>
-                    <!-- kalau sudah diterima manager baru bisa diproses-->
-                    <?php if ($pgd->status == 1) : ?>
-                      <a href="<?= base_url(); ?>penempatan/proses_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-info">
-                        <span class=" icon text-white-50">
-                          <i class="fa fa-circle-o-notch"></i>
-                        </span>
-                        <span class="text">Proses</span>
-                      </a>
-                    <?php endif; ?>
+                    <div class="btn-group">
+                      <?php if (($pgd->status == 0 || $pgd->status == 2)) : ?>
+                        <a href="#" class="btn btn-default disabled " style="width:110px>
+                          <span class=" icon text-white-50">
+                          <i class="fa  fa-check-square-o"></i>
+                          </span>
+                          <span class="text">Selesaikan</span>
+                        </a>
+                        <!-- kalau sudah diselesaikan tidak bisa lagi diselesaikan-->
+                      <?php elseif ($pgd->status == 1 && $pgd->_diselesaikan == 1) : ?>
+                        <a href="" class="btn btn-success disabled" style="width:105px">
+                          <span class=" icon text-white-50">
+                            <i class="fa  fa-check-square-o"></i>
+                          </span>
+                          <span class="text">Selesai</span>
+                        </a>
+                        <!-- kalau sudah diterima manager baru bisa diselesaikan-->
+                      <?php else : ?>
+                        <a href="<?= base_url(); ?>penempatan/selesaikan_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-success">
+                          <span class="icon text-white-50">
+                            <i class="fa  fa-check-square-o"></i>
+                          </span>
+                          <span class="text">Selesaikan</span>
+                        </a>
+                      <?php endif; ?>
+                    </div>
+
                     <!-- kalau status masih waiting -->
                     <a href="<?= base_url() ?>penempatan/detail_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
                     <a data-toggle="modal" href="#deletepenempatan<?= $pgd->id_penempatan; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus penempatan"><i class="fa fa-trash"></i></a>
@@ -96,13 +106,13 @@
                           </div>
 
                           <div class="modal-body text-danger">
-                            <h3>APAKAH ANDA YAKIN INGIN MENGHAPUS DATA penempatan?</h3>
+                            <h3>APAKAH ANDA YAKIN INGIN MENGHAPUS DATA PENEMPATAN INI?</h3>
                             <h3>PERUBAHAN TIDAK DAPAT DIKEMBALIKAN</h3>
                           </div>
 
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <a href="<?= base_url('penempatan/hapus_penempatan/' . $pgd->id_penempatan); ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data penempatan ini?')">Ya</button></a>
+                            <a href="<?= base_url('penempatan/hapus_penempatan/' . $pgd->id_penempatan); ?>"><button type="button" class="btn btn-danger">Ya</button></a>
                           </div>
                         </div>
                       </div>
