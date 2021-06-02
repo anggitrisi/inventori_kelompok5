@@ -60,15 +60,18 @@ class Login extends CI_controller
             $this->session->set_userdata('user_id', $login['USER_ID']);
             $this->session->set_userdata('username', $login['USER_NAME']);
             $this->session->set_userdata('group_id', $login['GROUP_ID']);
+
             // $getLoggedInGroup = $this->UsersModel->getLoggedInUserGroup($login['GROUP_ID']);
             // $this->session->set_userdata('group_name', $getLoggedInGroup['GROUP_NAME']);
             $user_id = $this->session->userdata("user_id");
             $response = $this->Main_model->getUserDetails($user_id);
 
+            var_dump($response->nama_petugas);
+            $this->session->set_userdata("nama_petugas", $response->nama_petugas);
 
             //if user is a superadmin, set his name in session as custom
             if ($this->session->userdata('group_id') == 1) {
-                $this->session->set_userdata("jabatan", "SUPERADMIN");
+                $this->session->set_userdata("jabatan", "Superadmin");
             } else {
 
                 $this->session->set_userdata("jabatan", $response->jabatan);

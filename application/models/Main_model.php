@@ -74,10 +74,10 @@ class Main_model extends CI_Model
   //get user details
   public function getUserDetails($user_id)
   {
-    $this->db->select("e.nama_petugas,e.no_telepon,e.gambar_petugas,g.GROUP_NAME as jabatan");
-    $this->db->from('petugas as e, usr_user as u', 'usr_group as g');
+    $this->db->select("u.user_name, e.nama_petugas,e.no_telepon,e.gambar_petugas,g.GROUP_NAME as jabatan");
+    $this->db->from('usr_user as u');
+    $this->db->join('petugas as e', 'e.USER_ID = u.USER_ID', 'left');
     $this->db->join('usr_group as g', 'g.GROUP_ID = u.GROUP_ID');
-    $this->db->where('u.USER_ID = e.USER_ID');
     $this->db->where('u.GROUP_ID   = g.GROUP_ID ');
     $this->db->where('u.USER_ID', $user_id);
     $query = $this->db->get();

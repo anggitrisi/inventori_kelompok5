@@ -80,7 +80,7 @@
                                     <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                     <h4 style="color: #ffffff">
-                                        <?= $this->session->userdata('username') ?> </h4>
+                                        <?= $this->session->userdata('nama_petugas') ?> </h4>
                                     <h6 style="color: #ffffff"></h6>
                                     <p>
                                         <?php echo $this->session->userdata('jabatan'); ?>
@@ -114,7 +114,7 @@
                         <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?php echo $this->session->userdata('username'); ?></p>
+                        <p><?php echo $this->session->userdata('nama_petugas'); ?></p>
                         <p><?php echo $this->session->userdata('jabatan'); ?></p>
                     </div>
                 </div>
