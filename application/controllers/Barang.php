@@ -174,4 +174,12 @@ class Barang extends MY_Controller
             $margin = 2
         );
     }
+    public function detail_barang($id)
+    {
+        $data['brgDetail'] = $this->Main_model->get_detail_barang($id);
+
+        $this->header('Detail Barang');
+        $this->load->view('barang/detail_barang', $data);
+        $this->footer();
+    }
 }
