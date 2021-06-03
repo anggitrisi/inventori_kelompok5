@@ -24,6 +24,11 @@ class Barang extends MY_Controller
     {
         $data['item'] = $this->Main_model->item_cat();
         $data['item1'] = $this->Main_model->select_record('barang');
+        $data['array_item'] = $this->Main_model->item_cat();
+
+        // print_r($data['array_item']);
+        // die;
+
         $this->header('Data barang');
         $this->load->view('barang/data_barang', $data);
         $this->footer();

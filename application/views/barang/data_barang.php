@@ -28,12 +28,13 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <?php $i = 1;
                             foreach ($item as $brg) : ?>
                                 <tr>
-
+                                    <!-- <td><?= $array_item; ?></td> -->
                                     <td><?= $i; ?></td>
-                                    <td><img src="<?php echo base_url('barang/generate_qrcode/' . $brg->id_barang); ?>"></td>
+                                    <td><img src="<?php echo base_url('barang/generate_qrcode/' . $brg->id_barang .  $brg->nama_barang .  $brg->jumlah .  $brg->gambar); ?>"></td>
                                     <td><?= $brg->nama_barang; ?></td>
                                     <td><?= $brg->merek; ?></td>
                                     <!-- <td><?= $brg->jumlah; ?></td> -->

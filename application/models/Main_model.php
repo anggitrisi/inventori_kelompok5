@@ -245,6 +245,17 @@ class Main_model extends CI_Model
     }
   }
 
+  public function item_cat_row()
+  { {
+      $sql = $this->db->select("*")
+        ->FROM('barang AS b,kategori as k')
+        ->where('b.id_kategori = k.id_kategori')
+        ->get();
+
+      return $sql->row();
+    }
+  }
+
   public function ubahaktifpegawai($id, $status)
   {
     $atur = array(
