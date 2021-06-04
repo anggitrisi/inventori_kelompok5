@@ -139,7 +139,7 @@ class User extends MY_Controller
   public function grup_user()
   {
     $data['grup_user'] = $this->Main_model->get_record('usr_group');
-    $data['kategori'] = $this->Main_model->select_record('kategori');
+  
 
 
     // var_dump($data['grup_user']);
@@ -165,17 +165,17 @@ class User extends MY_Controller
 
   public function update_grup_user()
   {
-    $GROUP_ID = $this->input->post('GROUP_ID');
+    $grup_users = $this->input->post('id_grup');
 
     $data = array(
       'GROUP_NAME' => $this->input->post('GROUP_NAME'),
     );
-    $where = array('GROUP_ID' => $GROUP_ID);
+    $where = array('GROUP_ID' => $grup_users);
     $this->load->model('Main_model');
     $response = $this->Main_model->update_record('usr_group', $data, $where);
     if ($response) {
       $this->session->set_flashdata('info', 'Record Updated Successfully..!');
-      redirect(base_url() . 'user/data_grup_user');
+      redirect(base_url() . 'user/grup_user');
     }
   }
 
