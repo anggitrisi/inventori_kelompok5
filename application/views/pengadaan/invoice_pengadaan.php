@@ -50,24 +50,24 @@
                   </td>
 
                   <td>
-                    <!-- kalau belum diterima atau ditolak manager atau sudah dibayar tidak bisa dibayar-->
-                    <?php if ($pgd->status == 0 || $pgd->status == 2 || $pgd->_dibayar == 1) : ?>
-                      <a href="<?= base_url(); ?>Pengadaan/bayar_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-default disabled">
+                    <!-- kalau sudah dibayar tidak bisa dibayar lagi-->
+                    <?php if ($pgd->_dibayar == 1) : ?>
+                      <a href="<?= base_url(); ?>Pengadaan/bayar_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-success disabled">
                         <span class="icon text-white-50">
-                          <i class="fa fa-money"></i>
+                          <i class="fa fa-check-square-o"></i>
                         </span>
                       </a>
                     <?php endif; ?>
                     <!-- kalau sudah diterima manager baru bisa dibayar-->
-                    <?php if ($pgd->status == 1 && $pgd->_dibayar == 0) : ?>
-                      <a href="<?= base_url(); ?>Pengadaan/bayar_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-info updateBayar">
+                    <?php if ($pgd->_dibayar == 0) : ?>
+                      <a href="<?= base_url(); ?>Pengadaan/bayar_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-success updateBayar">
                         <span class=" icon text-white-50">
-                          <i class="fa fa-money"></i>
+                          <i class="fa  fa-usd"></i>
                         </span>
                       </a>
                     <?php endif; ?>
                     <!-- kalau status masih waiting -->
-                    <a href="<?= base_url() ?>Pengadaan/detail_invoice_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
+                    <a href="<?= base_url() ?>Pengadaan/detail_invoice_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-primary"><i class=" fa fa-file"></i> </a>
                 </tr>
               <?php $i++;
               endforeach; ?>

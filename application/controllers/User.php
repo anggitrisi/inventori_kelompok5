@@ -47,7 +47,7 @@ class User extends MY_Controller
     } else {
       $data = [
         'USER_NAME' => $this->input->post('username', true),
-        'U_PASSWORD' => password_hash($this->input->post('password', true), PASSWORD_DEFAULT),
+        'U_PASSWORD' => sha1(md5($this->input->post('password'))),
         'GROUP_ID' => $this->input->post('id_group', true)
       ];
 
@@ -71,8 +71,6 @@ class User extends MY_Controller
     $data['edit_user'] = $this->Main_model->single_record('usr_user', array('USER_ID' => $USER_ID));
     $data['list_jabatan'] = $this->Main_model->select_record('usr_group');
 
-
-    var_dump($data['list_jabatan']);
     $this->header('Edit user');
     $this->load->view('users/edit_user', $data);
     $this->footer();
@@ -85,11 +83,11 @@ class User extends MY_Controller
     $data = array(
       'USER_NAME' => $this->input->post("USER_NAME"),
       'GROUP_ID' => $this->input->post("GROUP_ID"),
-      'U_PASSWORD' => $this->input->post("password"),
+      'U_PASSWORD' => sha1(md5($this->input->post("password"))),
     );
     $where = array('USER_ID' => $postData['USER_ID']);
     $response = $this->Main_model->update_record('usr_user', $data, $where);
-    if (response == TRUE) {
+    if ($response == TRUE) {
       $this->session->set_flashdata('success', 'Data user berhasil diupdate');
       redirect(base_url() . 'user/tambah_user');
     } else {
@@ -139,7 +137,7 @@ class User extends MY_Controller
   public function grup_user()
   {
     $data['grup_user'] = $this->Main_model->get_record('usr_group');
-    $data['kategori'] = $this->Main_model->select_record('kategori');
+  
 
 
     // var_dump($data['grup_user']);
@@ -165,17 +163,17 @@ class User extends MY_Controller
 
   public function update_grup_user()
   {
-    $GROUP_ID = $this->input->post('GROUP_ID');
+    $grup_users = $this->input->post('id_grup');
 
     $data = array(
       'GROUP_NAME' => $this->input->post('GROUP_NAME'),
     );
-    $where = array('GROUP_ID' => $GROUP_ID);
+    $where = array('GROUP_ID' => $grup_users);
     $this->load->model('Main_model');
     $response = $this->Main_model->update_record('usr_group', $data, $where);
     if ($response) {
       $this->session->set_flashdata('info', 'Record Updated Successfully..!');
-      redirect(base_url() . 'user/data_grup_user');
+      redirect(base_url() . 'user/grup_user');
     }
   }
 

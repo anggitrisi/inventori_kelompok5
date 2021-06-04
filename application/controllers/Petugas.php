@@ -92,7 +92,7 @@ class Petugas extends MY_Controller
         );
         $where = array('id_petugas' => $postData['id_petugas']);
         $response = $this->Main_model->update_record('petugas', $data, $where);
-        if (response == TRUE) {
+        if ($response == TRUE) {
             $this->session->set_flashdata('success', 'Data petugas berhasil diupdate');
             redirect(base_url() . 'Petugas');
         } else {

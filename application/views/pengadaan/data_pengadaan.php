@@ -23,7 +23,7 @@
                 <th>Total Biaya</th>
                 <th>Diminta oleh</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th width="110px">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -66,23 +66,7 @@
                   </td>
 
                   <td>
-                    <!-- kalau belum diterima atau ditolak manager atau sudah dibayar tidak bisa dibayar-->
-                    <?php if ($pgd->status == 0 || $pgd->status == 2 || $pgd->_dibayar == 1) : ?>
-                      <a href="<?= base_url(); ?>Pengadaan/bayar_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-default disabled">
-                        <span class="icon text-white-50">
-                          <i class="fa fa-money"></i>
-                        </span>
-                      </a>
-                    <?php endif; ?>
-                    <!-- kalau sudah diterima manager baru bisa dibayar-->
-                    <?php if ($pgd->status == 1 && $pgd->_dibayar == 0) : ?>
-                      <a href="<?= base_url(); ?>Pengadaan/bayar_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-info updateBayar">
-                        <span class=" icon text-white-50">
-                          <i class="fa fa-money"></i>
-                        </span>
-                      </a>
-                    <?php endif; ?>
-                    <!-- kalau status masih waiting -->
+                    <a href="<?= base_url() ?>pengadaan/edit_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                     <a href="<?= base_url() ?>Pengadaan/detail_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
                     <a data-toggle="modal" href="#deletePengadaan<?= $pgd->id_pengadaan; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pengadaan"><i class="fa fa-trash"></i></a>
 
