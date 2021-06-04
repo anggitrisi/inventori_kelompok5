@@ -85,7 +85,7 @@ class Supplier extends MY_Controller
         );
         $where = array('id_supplier' => $postData['id_supplier']);
         $response = $this->Main_model->update_record('supplier', $data, $where);
-        if (response == TRUE) {
+        if ($response == TRUE) {
             $this->session->set_flashdata('success', 'Data supplier berhasil diupdate');
             redirect(base_url() . 'Supplier');
         } else {
