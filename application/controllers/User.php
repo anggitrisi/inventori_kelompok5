@@ -87,7 +87,7 @@ class User extends MY_Controller
     );
     $where = array('USER_ID' => $postData['USER_ID']);
     $response = $this->Main_model->update_record('usr_user', $data, $where);
-    if (response == TRUE) {
+    if ($response == TRUE) {
       $this->session->set_flashdata('success', 'Data user berhasil diupdate');
       redirect(base_url() . 'user/tambah_user');
     } else {
