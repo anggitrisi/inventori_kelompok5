@@ -34,11 +34,13 @@
                                 <tr>
                                     <!-- <td><?= $array_item; ?></td> -->
                                     <td><?= $i; ?></td>
-                                    <td><img src="<?php echo base_url('barang/generate_qrcode/' . $brg->id_barang .  $brg->nama_barang .  $brg->jumlah .  $brg->gambar); ?>"></td>
+                                    <td><img src="<?php echo base_url('barang/generate_qrcode/' . $brg->id_barang); ?>" width="100" height="100">
+
+                                    </td>
                                     <td><?= $brg->nama_barang; ?></td>
                                     <td><?= $brg->merek; ?></td>
                                     <td><?= $brg->jumlah; ?></td>
-                                    <td> <img src="<?= base_url('assets_user/img/') . $brg->gambar; ?>" class="img-fluid" alt="..." width="100"> </td>
+                                    <td> <img src=" <?= base_url('assets_user/img/') . $brg->gambar; ?>" class="img-fluid" alt="..." width="100"> </td>
                                     <td><?= $brg->keterangan; ?></td>
                                     <td><?php echo $brg->nama_kategori; ?></td>
                                     <td><a href="<?= base_url() ?>Barang/edit_barang/<?= $brg->id_barang; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
