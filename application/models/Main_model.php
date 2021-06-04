@@ -74,7 +74,7 @@ class Main_model extends CI_Model
   //get user details
   public function getUserDetails($user_id)
   {
-    $this->db->select("e.nama_petugas,e.no_telepon,e.gambar_petugas,g.GROUP_NAME as jabatan");
+    $this->db->select("e.nama_petugas,e.id_petugas,e.no_telepon,e.alamat,e.gambar_petugas,g.GROUP_NAME as jabatan,u.USER_NAME,u.U_PASSWORD");
     $this->db->from('petugas as e, usr_user as u', 'usr_group as g');
     $this->db->join('usr_group as g', 'g.GROUP_ID = u.GROUP_ID');
     $this->db->where('u.USER_ID = e.USER_ID');
@@ -514,5 +514,57 @@ class Main_model extends CI_Model
             ";
     $this->db->query($sql);
     return TRUE;
+  }
+  public function get_petugas_tanpa_account()
+  {
+    $this->db->select('*');
+    $this->db->from('petugas');
+    $this->db->where('USER_ID', 0);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function create_user($table, $data)
+  {
+    $this->db->insert($table, $data);
+    return $this->db->insert_id(); // return last insert id
+  }
+
+  public function get_user_list()
+  {
+    $this->db->select('usr_user.*,petugas.nama_petugas,petugas.id_petugas,usr_group.GROUP_NAME');
+    $this->db->from('usr_user');
+    $this->db->join('petugas', 'petugas.USER_ID = usr_user.USER_ID');
+    $this->db->join('usr_group', 'usr_group.GROUP_ID = usr_user.GROUP_ID');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  public function ubahaktifuser($id, $status)
+  {
+    $atur = array(
+      'STATUS' => $status
+    );
+
+    $this->db->where('USER_ID', $id);
+    $this->db->update('usr_user', $atur);
+  }
+
+  public function get_record($table)
+  {
+    $this->db->select('usr_group.GROUP_ID, usr_group.GROUP_NAME');
+    $this->db->from($table);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  public function get_detail_barang($id)
+  {
+    $this->db->select('*');
+    $this->db->from('barang');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
+    $this->db->where('id_barang', $id);
+    $query = $this->db->get();
+    return $query->row();
   }
 }
