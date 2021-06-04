@@ -19,6 +19,7 @@ class penempatan extends MY_Controller
 
   public function data_penempatan()
   {
+    $data['sig'] = $this->Main_model->get_sig($this->session->userdata('id'));
     $data['penempatan'] = $this->Main_model->get_penempatan();   //penempatan join
     $this->header('Data penempatan');
     $this->load->view('penempatan/data_penempatan', $data);
@@ -148,4 +149,33 @@ class penempatan extends MY_Controller
     $this->load->view('penempatan/print_penempatan', $data);
     $this->footer();
   }
+
+  public function nerima_penempatan($id)
+    {
+      $postData = $this->input->post();
+
+    $data = array(
+      'status' => 1,
+      'tgl_disetujui' => date("Y-m-d H:i:s"),
+      'disetujui_oleh' =>  $this->session->userdata('user_id'),
+    );
+    $where = array('id_penempatan' => $id);
+    $this->session->set_flashdata('success', 'Nerima Penempatan');
+    $response = $this->Main_model->update_record('penempatan', $data, $where);
+        redirect(base_url() . 'Penempatan/data_penempatan');
+    }
+
+  public function tolak_penempatan($id)
+  {
+    $postData = $this->input->post();
+
+    $data = array(
+      'status' => 2,
+      'disetujui_oleh' =>  $this->session->userdata('user_id'),
+    );
+    $where = array('id_penempatan' => $id);
+    $this->session->set_flashdata('warning', 'Menolak Penempatan');
+    $response = $this->Main_model->update_record('penempatan', $data, $where);
+        redirect(base_url() . 'Penempatan/data_penempatan');
+    }
 }

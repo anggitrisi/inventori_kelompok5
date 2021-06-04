@@ -567,4 +567,51 @@ class Main_model extends CI_Model
     $query = $this->db->get();
     return $query->row();
   }
+  public function getUserWhere() {
+      
+    $sql = $this->db->select("*")
+    ->FROM('usr_user AS u,usr_group as g')
+    ->where('u.GROUP_ID = g.GROUP_ID')
+    ->get();
+
+  return $sql->row_array();
+   
+  }
+
+  Public function insert_single_signature($image)
+  {
+    
+      $data1=array(			
+        'img'=>$image,
+        'USER_ID'=>$this->input->post('USER_ID'),
+      );
+      $this->db->insert('sig', $data1);
+  
+  
+    return $this->db->affected_rows();
+  }
+
+  public function get_sig()
+  {
+    $sql = $this->db->select("*")
+      ->order_by('id', 'desc')
+      ->FROM('sig')
+      ->limit(1)
+      ->get();
+
+    return $sql->row_array();
+     
+    
+  }
+
+  public function ubahaktifpengadaan($id, $status)
+  {
+      $atur = array(
+          'status' => $status
+      );
+
+      $this->db->where('id_pengadaan', $id);
+      $this->db->update('pengadaan', $atur);
+  }
+
 }

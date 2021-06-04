@@ -32,17 +32,30 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!--Sweetalert & Toastr-->
     <link rel="stylesheet" href="<?= base_url() ?>assets/toastr.css">
-
+    <link rel="stylesheet" href="<?= base_url() ?>assets/profil.css">
     <!-- jQuery 3 -->
     <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/toastr.js"> </script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- Load File Jquery -->
     <script src="<?php echo base_url("js/jquery.min.js"); ?>" type="text/javascript"></script>
 
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+<style>
+.kbw-signature { width: 400px; height: 200px;}
+#signature canvas{
+width: 100% !important;
+height: auto;
+}
+.container{
+margin-left: 420px;
+ 
+}
+</style>
 </head>
 
 <body class="hold-transition skin-black-light">
