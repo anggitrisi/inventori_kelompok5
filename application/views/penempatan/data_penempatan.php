@@ -47,7 +47,7 @@
                         <span class="icon text-white-50">
                           <i class="fa fa-check"></i>
                         </span>
-                        <span class="text">DIterima</span>
+                        <span class="text">Disetujui</span>
                       </a>
                     <?php else : ?>
                       <a href="#" class="label label-danger">
@@ -93,8 +93,10 @@
                     <a href="<?= base_url() ?>penempatan/detail_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
                     <a data-toggle="modal" href="#deletepenempatan<?= $pgd->id_penempatan; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus penempatan"><i class="fa fa-trash"></i></a>
 
-
-
+                    <!-- kalau penempatan udah selesai baru bisa diprint -->
+                    <?php if ($pgd->status == 1 && $pgd->_diselesaikan == 1) : ?>
+                      <a href="<?= base_url() ?>penempatan/print_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-default"><i class=" fa fa-file"></i> </a>
+                    <?php endif; ?>
                     <!-- Modal Hapus-->
                     <div class="modal fade" id="deletepenempatan<?= $pgd->id_penempatan; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteBusLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

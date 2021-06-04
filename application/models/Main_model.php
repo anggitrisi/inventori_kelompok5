@@ -208,10 +208,11 @@ class Main_model extends CI_Model
   */
   public function get_detail_penempatan_item($id)
   {
+
     $this->db->select('permintaan_penempatan_item.*,barang.nama_barang,barang.merek,barang.gambar,barang.keterangan,barang.qrcode,kategori.nama_kategori');
     $this->db->from('permintaan_penempatan_item');
     $this->db->join('barang', 'barang.id_barang = permintaan_penempatan_item.id_barang');
-    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
 
     $this->db->having('id_penempatan', $id);
     $query = $this->db->get();

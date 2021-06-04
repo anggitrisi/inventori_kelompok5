@@ -63,14 +63,12 @@ class penempatan extends MY_Controller
 
 
     $data_item = array();
-    for ($index = 0; $index < count($id_barang); $index++) { // Kita buat perulangan berdasarkan id_barang sampai data terakhir
+    for ($index = 0; $index < count($id_barang) - 1; $index++) { // Kita buat perulangan berdasarkan id_barang sampai data terakhir
       array_push($data_item, array(
         'id_penempatan' => $id_penempatan,
         'id_barang' => $id_barang[$index], //mengubah array menjadi string
         'jumlah' => $jumlah[$index],  // Ambil dan set data nama sesuai index array dari $index
       ));
-
-      $index++;
     }
 
     //simpan ke tabel penempatan
@@ -136,5 +134,18 @@ class penempatan extends MY_Controller
       $this->session->set_flashdata('error', "Something went wrong");
     }
     redirect(base_url() . 'penempatan/data_penempatan');
+  }
+
+  public function print_penempatan($id)
+  {
+    //mengambil detail penempatan
+    $data['detail_penempatan'] = $this->Main_model->get_detail_penempatan($id);
+    //mengambil semua data barang dengan id_penempatan yang sama
+    $data['barang'] = $this->Main_model->get_detail_penempatan_item($id);
+    $data['pegawai'] = $this->Main_model->select_record('pegawai');
+
+    $this->header('Detail Pengadaan Barang');
+    $this->load->view('penempatan/print_penempatan', $data);
+    $this->footer();
   }
 }

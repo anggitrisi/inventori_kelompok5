@@ -53,6 +53,7 @@
           <div class="col-sm-6"><label>Pegawai Penganggung Jawab</label><select class="form-control" id="EMP_ID" name="EMP_ID" required>
               <option value="">pilih..</option>
               <?php foreach ($pegawai as $spl) : ?>
+
                 <option value="<?php echo $spl->EMP_ID; ?>"> <?php echo $spl->EMP_NAME; ?></option>
               <?php endforeach; ?>
             </select>
@@ -61,12 +62,18 @@
 
         <div class="form-group fieldGroup">
           <div class="input-group">
-            <div class="col-sm-6"><label>Barang</label>
+            <div class="col-sm-7"><label>Barang</label>
               <select class="form-control" id="id_barang[]" name="id_barang[]" required>
                 <option value="">pilih..</option>
                 <?php foreach ($barang as $brg) : ?>
-                  <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?></option>
-                <?php endforeach; ?>
+                  <?php if ($brg->jumlah > 0) : ?>
+                    <?php if ($brg->jumlah <= 10) : ?>
+                      <option style="color:red" value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?> (stok: <?php echo $brg->jumlah; ?> )
+                      <?php else : ?>
+                      <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?> (stok: <?php echo $brg->jumlah; ?> )
+                      <?php endif; ?>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
               </select>
             </div>
             <div class="col-sm-4">
@@ -92,15 +99,21 @@
 
   <div class="form-group fieldGroupCopy" style="display: none;">
     <div class="input-group">
-      <div class="col-sm-5"><label>Barang</label>
+      <div class="col-sm-7"><label>Barang</label>
         <select class="form-control" id="id_barang[]" name="id_barang[]">
           <option value="">pilih..</option>
           <?php foreach ($barang as $brg) : ?>
-            <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?></option>
-          <?php endforeach; ?>
+            <?php if ($brg->jumlah > 0) : ?>
+              <?php if ($brg->jumlah <= 10) : ?>
+                <option style="color:red" value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?> (stok: <?php echo $brg->jumlah; ?> )
+                <?php else : ?>
+                <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?> (stok: <?php echo $brg->jumlah; ?> )
+                <?php endif; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
         </select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-sm-4">
         <label>Jumlah</label><input class="form-control" name="jumlah[]" type="text" value="<?= set_value('jumlah') ?>"> <?= form_error('jumlah', '<small class="text-danger">', '</small>'); ?>
       </div>
       <div class="input-group-addon">

@@ -10,7 +10,8 @@
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Lokasi penempatan</b> <a class="pull-right"><?php echo $detail_penempatan->nama_lokasi; ?></a>
+              <b>Lokasi penempatan</b>
+              <p><a class="pull-right"><?php echo $detail_penempatan->nama_lokasi; ?></a></p>
             </li>
             <li class="list-group-item">
               <b>Penanggungjawab</b> <a class="pull-right"><?php echo $detail_penempatan->EMP_NAME; ?></a>
@@ -48,6 +49,8 @@
                     <th>No</th>
                     <th> Item</th>
                     <th class="hidden-xs"> Jumlah</th>
+                    <th class="hidden-xs"> Qrcode</th>
+
                   </tr>
                 </thead>
                 <tbody>
