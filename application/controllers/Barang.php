@@ -24,6 +24,11 @@ class Barang extends MY_Controller
     {
         $data['item'] = $this->Main_model->item_cat();
         $data['item1'] = $this->Main_model->select_record('barang');
+        $data['array_item'] = $this->Main_model->item_cat();
+
+        // print_r($data['array_item']);
+        // die;
+
         $this->header('Data barang');
         $this->load->view('barang/data_barang', $data);
         $this->footer();
@@ -158,6 +163,23 @@ class Barang extends MY_Controller
         }
     }
 
+    public function generate_qrcode($id)
+    {
+        $kodenya = $this->Main_model->get_detail_barang_array($id);
+        $kodenya = json_encode($kodenya);
+        // var_dump($kodenya);
+        // var_dump(json_encode($kodenya));
+
+        // die;
+        //render qrcode dengan format PNG
+        QRcode::png(
+            $kodenya,
+            $outfile = false,
+            $level = QR_ECLEVEL_H,
+            $size = 5,
+            $margin = 2
+        );
+    }
     public function detail_barang($id)
     {
         $data['brgDetail'] = $this->Main_model->get_detail_barang($id);

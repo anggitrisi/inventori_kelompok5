@@ -245,6 +245,17 @@ class Main_model extends CI_Model
     }
   }
 
+  public function item_cat_row()
+  { {
+      $sql = $this->db->select("*")
+        ->FROM('barang AS b,kategori as k')
+        ->where('b.id_kategori = k.id_kategori')
+        ->get();
+
+      return $sql->row();
+    }
+  }
+
   public function ubahaktifpegawai($id, $status)
   {
     $atur = array(
@@ -540,5 +551,15 @@ class Main_model extends CI_Model
     $this->db->where('id_barang', $id);
     $query = $this->db->get();
     return $query->row();
+  }
+
+  public function get_detail_barang_array($id)
+  {
+    $this->db->select('*');
+    $this->db->from('barang');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
+    $this->db->where('id_barang', $id);
+    $query = $this->db->get();
+    return $query->row_array();
   }
 }
