@@ -8,35 +8,37 @@
               <img src="<?= base_url(); ?>assets/pages/media/invoice/walmart.png" class="img-responsive" alt="" />
             </div>
             <div class="col-xs-6">
-              <p> #<?php echo $detail_pengadaan->id_pengadaan ?> / <?php echo $detail_pengadaan->tgl_permintaan; ?>
+              <p> #<?php echo $detail_penempatan->id_penempatan; ?> / <?php echo $detail_penempatan->tgl_permintaan_penempatan; ?>
               </p>
 
             </div>
           </div>
           <hr />
           <div class="row">
-            <div class="col-xs-4">
-              <h3>SUPPLIER:</h3>
+            <div class="col-xs-6">
+              <h3>Detail Penempatan:</h3>
               <ul class="list-unstyled">
-                <li> <?= $detail_pengadaan->nama_supplier ?> </li>
-                <li> <?= $detail_pengadaan->nama_perusahaan ?> </li>
-                <li> <?= $detail_pengadaan->email; ?> </li>
-                <li> <?= $detail_pengadaan->no_telpSupplier ?> </li>
+                <li> <b>Lokasi penempatan : </b> <a> <?php echo $detail_penempatan->nama_lokasi; ?></a>
+                </li>
+                <li> <b>Penanggungjawab : </b> <a><?php echo $detail_penempatan->EMP_NAME; ?></a> </li>
+                <li> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; <i class="fa fa-envelope mr"> </i> <a><?php echo $detail_penempatan->EMP_EMAIL; ?></a>
+                </li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-phone"> </i> <a><?php echo $detail_penempatan->EMP_CELL; ?></a>
+                </li>
               </ul>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-2">
 
             </div>
             <div class="col-xs-4 invoice-payment">
-              <h3>Detail Pembayaran:</h3>
               <div id="invoice">
-                <div class="date">Tanggal invoice: <?php echo date('d M Y', strtotime($detail_pengadaan->tgl_masuk)); ?></div>
-                <div class="date">Invoice Status <?php if ($detail_pengadaan->_dibayar == 1) {
-                                                    echo "<span class='label label-success'>PAID</span>";
-                                                  } else {
-                                                    echo "<span class='label label-warning'>NOT PAID</span>";
-                                                  }
-                                                  ?>
+                <div class="date">Tanggal Penempatan: <?php echo date('d M Y', strtotime($detail_penempatan->tgl_ditempatkan)); ?></div>
+                <div class="date">Status Penempatan <?php if ($detail_penempatan->_diselesaikan == 1) {
+                                                      echo "<span class='label label-success'>Telah ditempatkan</span>";
+                                                    } else {
+                                                      echo "<span class='label label-warning'>Belum ditempatkan</span>";
+                                                    }
+                                                    ?>
                 </div>
               </div>
             </div>
@@ -49,7 +51,6 @@
                     <th>No</th>
                     <th> Item</th>
                     <th class="hidden-xs"> Jumlah</th>
-                    <th class="hidden-xs"> Harga</th>
                     <th class="hidden-xs"> qrcode</th>
                   </tr>
                 </thead>
@@ -61,7 +62,7 @@
                       <td><?php echo $n; ?></td>
                       <td><?php echo $rows->nama_barang; ?></td>
                       <td><?php echo $rows->jumlah; ?></td>
-                      <td class=""><?php echo $rows->harga; ?></td>
+                      <td class=""></td>
                     </tr>
                   <?php $n++;
                   } ?>
@@ -74,20 +75,15 @@
             <div class="col-xs-4">
               <div class="well">
                 <address>
-                  <p><strong>Di <i>request</i> oleh &nbsp : </strong><?= $detail_pengadaan->petugas_peminta; ?></p>
-                  <p><strong>Disetujui oleh &nbsp : </strong><?= $detail_pengadaan->petugas_penyetuju; ?></p>
-                  <p><strong>Diterima oleh &nbsp : </strong><?= $detail_pengadaan->petugas_pembayar; ?></p>
+                  <p><strong>Di <i>request</i> oleh &nbsp : </strong><?= $detail_penempatan->petugas_peminta; ?></p>
+                  <p><strong>Disetujui oleh &nbsp : </strong><?= $detail_penempatan->petugas_penyetuju; ?></p>
+                  <p><strong>Diselesaikan oleh &nbsp : </strong><?= $detail_penempatan->petugas_penyelesai; ?></p>
                 </address>
               </div>
             </div>
             <div class="col-xs-8 invoice-block">
-              <ul class="list-unstyled detail_pengadaans">
-                <li>
-                  <strong>Total Harga:</strong> Rp. <?= $detail_pengadaan->total_harga ?>
-                </li>
-              </ul>
               <br />
-              <a class="btn btn-lg btn-primary hidden-print margin-bottom-5" onclick="javascript:window.print();"> Print
+              <a class="btn btn-lg btn-success hidden-print margin-bottom-5" onclick="javascript:window.print();"> Print
                 <i class="fa fa-print"></i>
               </a>
             </div>
