@@ -67,7 +67,7 @@
                       </a>
                     <?php endif; ?>
                     <!-- kalau status masih waiting -->
-                    <a href="<?= base_url() ?>Pengadaan/detail_invoice_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-primary"><i class=" fa fa-file"></i> </a>
+                    <a href="<?= base_url() ?>Pengadaan/detail_invoice_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-default"><i class=" fa fa-file"></i> </a>
                 </tr>
               <?php $i++;
               endforeach; ?>

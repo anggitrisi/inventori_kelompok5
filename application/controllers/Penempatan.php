@@ -60,7 +60,7 @@ class penempatan extends MY_Controller
     //data untuk ke tabel permintaan_item berupa array (karena multiple input)
     $id_barang = $_POST['id_barang'];
     $jumlah = $_POST['jumlah'];
-
+    $id_lokasi = $this->input->post('id_lokasi');
 
     $data_item = array();
     for ($index = 0; $index < count($id_barang) - 1; $index++) { // Kita buat perulangan berdasarkan id_barang sampai data terakhir
@@ -68,6 +68,7 @@ class penempatan extends MY_Controller
         'id_penempatan' => $id_penempatan,
         'id_barang' => $id_barang[$index], //mengubah array menjadi string
         'jumlah' => $jumlah[$index],  // Ambil dan set data nama sesuai index array dari $index
+        'id_lokasi' => $id_lokasi
       ));
     }
 
@@ -140,6 +141,7 @@ class penempatan extends MY_Controller
   {
     //mengambil detail penempatan
     $data['detail_penempatan'] = $this->Main_model->get_detail_penempatan($id);
+    // $data['detail_aset_inventaris'] = $this->Main_model->get_detail_keluar_item_by_id($id);
     //mengambil semua data barang dengan id_penempatan yang sama
     $data['barang'] = $this->Main_model->get_detail_penempatan_item($id);
     $data['pegawai'] = $this->Main_model->select_record('pegawai');
@@ -147,5 +149,40 @@ class penempatan extends MY_Controller
     $this->header('Detail Pengadaan Barang');
     $this->load->view('penempatan/print_penempatan', $data);
     $this->footer();
+  }
+
+  public function aset_inventaris()
+  {
+    $data['keluar_item'] = $this->Main_model->get_detail_keluar_item();
+
+    $this->header('Data Aset Inventaris');
+    $this->load->view('penempatan/aset_inventaris', $data);
+    $this->footer();
+  }
+
+  public function detail_aset_inventaris($id)
+  {
+    //mengambil detail aset_inventaris
+    $data['detail_aset_inventaris'] = $this->Main_model->get_detail_keluar_item_by_id($id);
+    //mengambil semua data barang dengan id_aset_inventaris yang sama
+    $data['barang'] = $this->Main_model->get_detail_penempatan_item($id);
+    $data['pegawai'] = $this->Main_model->select_record('pegawai');
+    $this->header('Detail Pengadaan Barang');
+    $this->load->view('penempatan/detail_aset_inventaris', $data);
+    $this->footer();
+  }
+
+  public function generate_qrcode($id)
+  {
+    $kodenya = "http://localhost/godblessthis/inventori_kelompok5/Barang/detail_barang/" . $id;
+
+    //render qrcode dengan format PNG
+    QRcode::png(
+      $kodenya,
+      $outfile = false,
+      $level = QR_ECLEVEL_H,
+      $size = 5,
+      $margin = 2
+    );
   }
 }

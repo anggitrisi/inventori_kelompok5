@@ -23,7 +23,7 @@
                 <th>Total Biaya</th>
                 <th>Diminta oleh</th>
                 <th>Status</th>
-                <th width="110px">Aksi</th>
+                <th width="120px">Aksi</th>
               </tr>
             </thead>
             <tbody>

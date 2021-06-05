@@ -33,12 +33,12 @@
                                     <td><?= $jbt->nama_petugas; ?></td>
                                     <td><?= $jbt->no_telepon; ?></td>
                                     <td><?= $jbt->alamat; ?></td>
-                                    <td><?php echo $jbt->GROUP_NAME;?></td>
+                                    <td><?php echo $jbt->GROUP_NAME; ?></td>
 
-                                    <td><a href="<?= base_url() ?>Petugas/edit_petugas/<?= $jbt->id_petugas; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                        <a data-toggle="modal" href="#deletePetugas<?= $jbt->id_petugas; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Petugas"><i class="fa fa-trash"></i> Hapus</a>
+                                    <td><a href="<?= base_url() ?>Petugas/edit_petugas/<?= $jbt->id_petugas; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a data-toggle="modal" href="#deletePetugas<?= $jbt->id_petugas; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Petugas"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>Petugas/detail_petugas/<?= $jbt->id_petugas; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
-                                       
+
                                         <?php if ($jbt->STATUS == 0) : ?>
                                             <a href="<?= base_url(); ?>Petugas/aktifkan_petugas/<?= $jbt->id_petugas; ?>" class="btn btn-success ">
                                                 <span class="icon text-white-50">

@@ -31,8 +31,8 @@
                                     <td><?= $lks->nama_lokasi; ?></td>
                                     <td><?= $lks->fakultas; ?></td>
 
-                                    <td><a href="<?= base_url() ?>lokasi/edit_lokasi/<?= $lks->id_lokasi; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                        <a data-toggle="modal" href="#deletelokasi<?= $lks->id_lokasi; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus lokasi"><i class="fa fa-trash"></i> Hapus</a>
+                                    <td><a href="<?= base_url() ?>lokasi/edit_lokasi/<?= $lks->id_lokasi; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a data-toggle="modal" href="#deletelokasi<?= $lks->id_lokasi; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus lokasi"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>lokasi/detail_lokasi/<?= $lks->id_lokasi; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
 
 
