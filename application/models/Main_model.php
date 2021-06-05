@@ -696,10 +696,10 @@ class Main_model extends CI_Model
     $this->db->from('pengadaan');
     //$this->db->join('sales_detail', 'sales_detail.sales_no  =  sales.sales_no', 'left');
     if ($start_date == $end_date) {
-      $this->db->like('pengadaan.tgl_permintaan', $start_date);
+      $this->db->like('pengadaan.tgl_masuk', $start_date);
     } else {
-      $this->db->where('pengadaan.tgl_permintaan >=', $start_date);
-      $this->db->where('pengadaan.tgl_permintaan <=', $end_date);
+      $this->db->where('pengadaan.tgl_masuk >=', $start_date);
+      $this->db->where('pengadaan.tgl_masuk <=', $end_date);
     }
     $query_result = $this->db->get();
     $result = $query_result->result();
@@ -714,10 +714,10 @@ class Main_model extends CI_Model
     $this->db->from('penempatan');
     //$this->db->join('sales_detail', 'sales_detail.sales_no  =  sales.sales_no', 'left');
     if ($start_date == $end_date) {
-      $this->db->like('penempatan.tgl_permintaan_penempatan', $start_date);
+      $this->db->like('penempatan.tgl_ditempatkan', $start_date);
     } else {
-      $this->db->where('penempatan.tgl_permintaan_penempatan >=', $start_date);
-      $this->db->where('penempatan.tgl_permintaan_penempatan <=', $end_date);
+      $this->db->where('penempatan.tgl_ditempatkan >=', $start_date);
+      $this->db->where('penempatan.tgl_ditempatkan <=', $end_date);
     }
     $query_result = $this->db->get();
     $result = $query_result->result();

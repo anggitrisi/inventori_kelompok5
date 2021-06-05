@@ -77,7 +77,7 @@
                                                     <th class="no text-right">INVOICE <?php //echo $invoice_no 
                                                                                         ?></th>
                                                     <th class="desc">Invoice
-                                                        Date: <?php echo date('Y-m-d', strtotime($order[$key]->tgl_permintaan)) ?></th>
+                                                        Date: <?php echo date('Y-m-d', strtotime($order[$key]->tgl_masuk)) ?></th>
                                                     <th class="desc">
                                                         No pengadaan: <?php echo $order[$key]->id_pengadaan ?></th>
                                                 </tr>
