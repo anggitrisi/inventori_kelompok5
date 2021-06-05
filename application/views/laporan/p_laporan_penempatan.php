@@ -70,60 +70,61 @@
                                     $total_profit = 0;
                                     $p = 0;
                                     ?>
-                                    <?php if (!empty($invoice_details)): foreach ($invoice_details as $id_penempatan => $penempatan) : ?>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th class="no text-right">INVOICE <?php //echo $invoice_no 
-                                                                                        ?></th>
-                                                    <th class="desc">Invoice
-                                                        Date: <?php echo date('Y-m-d', strtotime($order[$key]->tgl_ditempatkan)) ?></th>
-                                                    <th class="desc">
-                                                        No penempatan: <?php echo $order[$key]->id_penempatan ?></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                        <table border="0" cellspacing="0" cellpadding="0">
-                                            <thead>
-                                                <tr style="background-color: #ECECEC">
-                                                    <th>No.</th>
-                                                    <th>Nama barang</th>
-                                                    <th>Jumlah</th>
-                        
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $k = 1 ?>
-                                                <?php foreach ($penempatan as $ppt) : ?>
+                                    <?php if (!empty($invoice_details)) : foreach ($invoice_details as $id_penempatan => $penempatan) : ?>
+                                            <table>
+                                                <thead>
                                                     <tr>
-                                                        <td><?= $k; ?></td>
-                                                        <td><?= $ppt->nama_barang; ?></td>
-                                                        <td><?= $ppt->jumlah_keluar; ?></td>
-                                                       
+                                                        <th class="no text-right">INVOICE <?php //echo $invoice_no 
+                                                                                            ?></th>
+                                                        <th class="desc">Invoice
+                                                            Date: <?php echo date('Y-m-d', strtotime($order[$key]->tgl_ditempatkan)) ?></th>
+                                                        <th class="desc">
+                                                            No penempatan: <?php echo $order[$key]->id_penempatan ?></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <thead>
+                                                    <tr style="background-color: #ECECEC">
+                                                        <th>No.</th>
+                                                        <th>Nama barang</th>
+                                                        <th>Jumlah</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $k = 1 ?>
+                                                    <?php foreach ($penempatan as $ppt) : ?>
+                                                        <tr>
+                                                            <td><?= $k; ?></td>
+                                                            <td><?= $ppt->nama_barang; ?></td>
+                                                            <td><?= $ppt->jumlah_keluar; ?></td>
+
+                                                        </tr>
+
+                                                        <?php $k++ ?>
+
+
+                                                    <?php
+                                                    endforeach;
+                                                    ?>
+
+
+                                                </tbody>
+
+                                                <tfoot>
+
+                                                    <tr>
+                                                        <td colspan="2">Nama Lokasi</td>
+                                                        <td><?php echo ($order[$key]->id_lokasi) ?></td>
                                                     </tr>
 
-                                                    <?php $k++ ?>
+                                                </tfoot>
 
-
-                                                <?php
-                                                endforeach;
-                                                ?>
-
-
-                                            </tbody>
-
-                                            <tfoot>
-
-                                                <tr>
-                                                    <td colspan="2">Nama Lokasi</td>
-                                                    <td><?php echo ($order[$key]->id_lokasi) ?></td>
-                                                </tr>
-
-                                            </tfoot>
-
-                                        </table>
-                                        <?php $key++; ?>
-                                    <?php endforeach; endif; ?>
+                                            </table>
+                                            <?php $key++; ?>
+                                    <?php endforeach;
+                                    endif; ?>
 
                                 </main>
                                 <hr>

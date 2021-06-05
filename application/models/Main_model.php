@@ -617,27 +617,29 @@ class Main_model extends CI_Model
     return $query->row();
   }
 
-  public function getUserWhere() {
-      
-    $sql = $this->db->select("*")
-    ->FROM('usr_user AS u,usr_group as g')
-    ->where('u.GROUP_ID = g.GROUP_ID')
-    ->get();
+  public function getUserWhere($id)
+  {
 
-  return $sql->row_array();
-   
+    $sql = $this->db->select("*")
+      ->FROM('usr_user AS u,usr_group as g,petugas as p')
+      ->where('u.GROUP_ID = g.GROUP_ID')
+      ->where('u.USER_ID = p.USER_ID')
+      ->where('u.USER_ID', $id)
+      ->get();
+
+    return $sql->row_array();
   }
 
-  Public function insert_single_signature($image)
+  public function insert_single_signature($image)
   {
-    
-      $data1=array(			
-        'img'=>$image,
-        'USER_ID'=>$this->input->post('USER_ID'),
-      );
-      $this->db->insert('sig', $data1);
-  
-  
+
+    $data1 = array(
+      'img' => $image,
+      'USER_ID' => $this->input->post('USER_ID'),
+    );
+    $this->db->insert('sig', $data1);
+
+
     return $this->db->affected_rows();
   }
 
@@ -650,18 +652,16 @@ class Main_model extends CI_Model
       ->get();
 
     return $sql->row_array();
-     
-    
   }
 
   public function ubahaktifpengadaan($id, $status)
   {
-      $atur = array(
-          'status' => $status
-      );
+    $atur = array(
+      'status' => $status
+    );
 
-      $this->db->where('id_pengadaan', $id);
-      $this->db->update('pengadaan', $atur);
+    $this->db->where('id_pengadaan', $id);
+    $this->db->update('pengadaan', $atur);
   }
 
   //===== Model Laporan Pengadaan dan Penempatan ======
@@ -686,8 +686,8 @@ class Main_model extends CI_Model
 
     return $query->result();
   }
-  
-  
+
+
 
   public function get_invoice_by_date1($start_date, $end_date)
   {
@@ -731,6 +731,4 @@ class Main_model extends CI_Model
     $this->_table_name = $table;
     $this->_primary_key = $pr_key;
   }
-
-
 }
