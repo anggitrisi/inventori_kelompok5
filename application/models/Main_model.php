@@ -152,7 +152,6 @@ class Main_model extends CI_Model
   //data invoice diambil dari data pengadaan yang sudah disetujui (id_bayar = 1)
   public function get_invoice_pengadaan()
   {
-
     $this->db->select('*');
     $this->db->from('pengadaan');
     $this->db->join('supplier', 'supplier.id_supplier = pengadaan.id_supplier');
@@ -247,6 +246,17 @@ class Main_model extends CI_Model
         ->get();
 
       return $sql->result();
+    }
+  }
+
+  public function item_cat_row()
+  { {
+      $sql = $this->db->select("*")
+        ->FROM('barang AS b,kategori as k')
+        ->where('b.id_kategori = k.id_kategori')
+        ->get();
+
+      return $sql->row();
     }
   }
 
@@ -507,8 +517,8 @@ class Main_model extends CI_Model
 
   public function insert_keluar_item($id)
   {
-    $sql = "INSERT INTO keluar_item (`id_penempatan`,`id_barang`,`jumlah_keluar`)  
-            SELECT `id_penempatan`,`id_barang`,`jumlah`
+    $sql = "INSERT INTO keluar_item (`id_penempatan`,`id_barang`,`jumlah_keluar`,`id_lokasi`)  
+            SELECT `id_penempatan`,`id_barang`,`jumlah`,`id_lokasi`
             FROM `permintaan_penempatan_item`
             WHERE `id_penempatan` = '$id'
             ";
@@ -567,6 +577,46 @@ class Main_model extends CI_Model
     $query = $this->db->get();
     return $query->row();
   }
+
+
+  public function get_detail_barang_array($id)
+  {
+    $this->db->select('*');
+    $this->db->from('barang');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
+    $this->db->where('id_barang', $id);
+    $query = $this->db->get();
+    return $query->row_array();
+  }
+
+  public function get_detail_keluar_item()
+  {
+
+    $this->db->select('keluar_item.*,barang.nama_barang,barang.merek,barang.gambar,keluar_item.keterangan,barang.qrcode,barang.jumlah as stok,kategori.nama_kategori,lokasi.nama_lokasi,lokasi.fakultas, pegawai.EMP_NAME as penanggung_jawab');
+    $this->db->from('keluar_item');
+    $this->db->join('barang', 'barang.id_barang = keluar_item.id_barang');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
+    $this->db->join('penempatan', 'penempatan.id_penempatan = keluar_item.id_penempatan', 'left');
+    $this->db->join('lokasi', 'lokasi.id_lokasi = penempatan.id_lokasi', 'left');
+    $this->db->join('pegawai', 'pegawai.EMP_ID = penempatan.pegawai_penanggung_jawab', 'left');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  public function get_detail_keluar_item_by_id($id)
+  {
+    $this->db->select('keluar_item.*,barang.nama_barang,barang.merek,barang.gambar,keluar_item.keterangan,barang.qrcode,barang.jumlah as stok,kategori.nama_kategori,lokasi.nama_lokasi,lokasi.fakultas, pegawai.EMP_NAME as penanggung_jawab');
+    $this->db->from('keluar_item');
+    $this->db->join('barang', 'barang.id_barang = keluar_item.id_barang');
+    $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
+    $this->db->join('penempatan', 'penempatan.id_penempatan = keluar_item.id_penempatan', 'left');
+    $this->db->join('lokasi', 'lokasi.id_lokasi = penempatan.id_lokasi', 'left');
+    $this->db->join('pegawai', 'pegawai.EMP_ID = penempatan.pegawai_penanggung_jawab', 'left');
+    $this->db->where('id', $id);
+    $query = $this->db->get();
+    return $query->row();
+  }
+
   public function getUserWhere() {
       
     $sql = $this->db->select("*")
@@ -613,5 +663,6 @@ class Main_model extends CI_Model
       $this->db->where('id_pengadaan', $id);
       $this->db->update('pengadaan', $atur);
   }
+
 
 }

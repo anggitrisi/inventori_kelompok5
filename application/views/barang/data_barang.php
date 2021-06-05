@@ -17,9 +17,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Qrcode</th>
                                 <th>Nama Barang</th>
                                 <th>Merek</th>
-                                <th>Stok</th>
+                                <th>Jumlah</th>
                                 <th>Gambar</th>
                                 <th>Keterangan</th>
                                 <th>Kategori</th>
@@ -27,22 +28,25 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <?php $i = 1;
                             foreach ($item as $brg) : ?>
                                 <tr>
-
+                                    <!-- <td><?= $array_item; ?></td> -->
                                     <td><?= $i; ?></td>
+                                    <td><img src="<?php echo base_url('barang/generate_qrcode/' . $brg->id_barang); ?>" width="100" height="100">
+
+                                    </td>
                                     <td><?= $brg->nama_barang; ?></td>
                                     <td><?= $brg->merek; ?></td>
                                     <td><?= $brg->jumlah; ?></td>
-                                    <td> <img src="<?= base_url('assets_user/img/') . $brg->gambar; ?>" class="img-fluid" alt="..." width="100"> </td>
+                                    <td> <img src=" <?= base_url('assets_user/img/') . $brg->gambar; ?>" class="img-fluid" alt="..." width="100"> </td>
                                     <td><?= $brg->keterangan; ?></td>
                                     <td><?php echo $brg->nama_kategori; ?></td>
-
-
                                     <td><a href="<?= base_url() ?>Barang/edit_barang/<?= $brg->id_barang; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                         <a data-toggle="modal" href="#deleteBarang<?= $brg->id_barang; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pegawai"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>Barang/detail_barang/<?= $brg->id_barang; ?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+
 
 
                                         <!-- Modal Hapus-->

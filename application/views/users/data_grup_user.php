@@ -36,8 +36,8 @@
 
                                     <td><?= $i; ?></td>
                                     <td><?= $gu->GROUP_NAME; ?></td>
-                                    <td><a href="#editGrupUser<?= $gu->GROUP_ID; ?>" data-toggle='modal' class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                        <a data-toggle="modal" href="#deleteKategori<?= $gu->GROUP_ID; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pegawai"><i class="fa fa-trash"></i> Hapus</a>
+                                    <td><a href="#editGrupUser<?= $gu->GROUP_ID; ?>" data-toggle='modal' class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a data-toggle="modal" href="#deleteKategori<?= $gu->GROUP_ID; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pegawai"><i class="fa fa-trash"></i></a>
 
                                         <!-- Modal Hapus-->
                                         <div class="modal fade" id="deleteKategori<?= $gu->GROUP_ID; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteBusLabel" aria-hidden="true">
@@ -63,7 +63,7 @@
                                         </div>
                                         <!-- END Modal -->
 
-                                        <?php $i++;
+                                    <?php $i++;
                                 endforeach; ?>
                     </table>
 
@@ -80,42 +80,40 @@
 
 
 
-<?php foreach ($grup_user as $rows): ?>      
-    
-<div class="modal fade" id="editGrupUser<?php echo $rows->GROUP_ID; ?>" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Edit Grup USer</h4>
-            </div>
-            <?php $attributes = array('class' => 'form-horizontal group-border hover-stripped', 'id' => 'myform', 'method' => 'post');
-                echo form_open('user/update_grup_user', $attributes); ?>
-            <div class="modal-body">
-                <div class='form-group'>
-                    <label for='nama_kategori' class='col-lg-3 col-sm-3 control-label'>Nama Kategori</label>
+<?php foreach ($grup_user as $rows) : ?>
 
-                    <div class='col-lg-9'>
-                        <input type='hidden' name="id_grup" class='form-control' id='id_grups'
-                               value='<?php echo $rows->GROUP_ID; ?>'>
-                        <input type='text' name="GROUP_NAME" class='form-control' id='nama_grup'
-                               value='<?php echo $rows->GROUP_NAME; ?>'>
+    <div class="modal fade" id="editGrupUser<?php echo $rows->GROUP_ID; ?>" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Edit Grup USer</h4>
+                </div>
+                <?php $attributes = array('class' => 'form-horizontal group-border hover-stripped', 'id' => 'myform', 'method' => 'post');
+                echo form_open('user/update_grup_user', $attributes); ?>
+                <div class="modal-body">
+                    <div class='form-group'>
+                        <label for='nama_kategori' class='col-lg-3 col-sm-3 control-label'>Nama Kategori</label>
+
+                        <div class='col-lg-9'>
+                            <input type='hidden' name="id_grup" class='form-control' id='id_grups' value='<?php echo $rows->GROUP_ID; ?>'>
+                            <input type='text' name="GROUP_NAME" class='form-control' id='nama_grup' value='<?php echo $rows->GROUP_NAME; ?>'>
+                        </div>
                     </div>
                 </div>
+                <br>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" name="addNewKota" class="btn btn-primary" value="Simpan">
+                </div>
+                </form>
             </div>
-            <br>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <input type="submit" name="addNewKota" class="btn btn-primary" value="Simpan">
-            </div>
-            </form>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
-    <?php endforeach; ?>
-   
+<?php endforeach; ?>
+
 
 
 <!-- Modal Add New Menu-->

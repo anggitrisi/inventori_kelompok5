@@ -22,7 +22,7 @@
                                 <th>Email</th>
                                 <th>No Handphone</th>
                                 <th>Alamat</th>
-                                <th>Aksi</th>
+                                <th width="220px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,8 +37,8 @@
                                     <td><?= $spl->no_telp; ?></td>
                                     <td><?= $spl->alamat; ?></td>
 
-                                    <td><a href="<?= base_url() ?>Supplier/edit_supplier/<?= $spl->id_supplier; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                        <a data-toggle="modal" href="#deletesupplier<?= $spl->id_supplier; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus supplier"><i class="fa fa-trash"></i> Hapus</a>
+                                    <td><a href="<?= base_url() ?>Supplier/edit_supplier/<?= $spl->id_supplier; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a data-toggle="modal" href="#deletesupplier<?= $spl->id_supplier; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus supplier"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>Supplier/detail_supplier/<?= $spl->id_supplier; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
                                         <?php if ($spl->STATUS == 0) : ?>
                                             <a href="<?= base_url(); ?>Supplier/aktifkan_supplier/<?= $spl->id_supplier; ?>" class="btn btn-success ">

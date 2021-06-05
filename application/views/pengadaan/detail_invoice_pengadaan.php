@@ -8,7 +8,7 @@
               <img src="<?= base_url(); ?>assets/pages/media/invoice/walmart.png" class="img-responsive" alt="" />
             </div>
             <div class="col-xs-6">
-              <p> #<?php echo $detail_pengadaan->id_pengadaan ?> / <?php echo $detail_pengadaan->tgl_permintaan; ?>
+              <p> #<?php echo $detail_pengadaan->id_pengadaan ?> / <?php echo date('d-m-y', strtotime($detail_pengadaan->tgl_permintaan)); ?>
               </p>
 
             </div>
@@ -62,6 +62,8 @@
                       <td><?php echo $rows->nama_barang; ?></td>
                       <td><?php echo $rows->jumlah; ?></td>
                       <td class=""><?php echo $rows->harga; ?></td>
+                      <td><img src="<?php echo base_url('pengadaan/generate_qrcode/' . $rows->id_barang); ?>" width="100" height="100"></td>
+                      </td>
                     </tr>
                   <?php $n++;
                   } ?>

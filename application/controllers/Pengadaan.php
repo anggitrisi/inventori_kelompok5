@@ -21,6 +21,7 @@ class Pengadaan extends MY_Controller
   {
     $data['sig'] = $this->Main_model->get_sig($this->session->userdata('id'));
     $data['pengadaan'] = $this->Main_model->get_pengadaan();   //pengadaan join
+    $data['barang'] = $this->Main_model->select_record('barang');
 
     $this->header('Data pengadaan');
     $this->load->view('pengadaan/data_pengadaan', $data);
@@ -316,6 +317,20 @@ keterangan_diselesaikan : saat petugas menyetujui_diselesaikan = 1, lalu data ba
     $this->header('Data pengadaan');
     $this->load->view('pengadaan/detail_invoice_pengadaan', $data);
     $this->footer();
+  }
+
+  public function generate_qrcode($id)
+  {
+    $kodenya = "http://localhost/godblessthis/inventori_kelompok5/Barang/detail_barang/" . $id;
+
+    //render qrcode dengan format PNG
+    QRcode::png(
+      $kodenya,
+      $outfile = false,
+      $level = QR_ECLEVEL_H,
+      $size = 5,
+      $margin = 2
+    );
   }
 
   

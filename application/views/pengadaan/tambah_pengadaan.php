@@ -92,8 +92,12 @@
         <select class="form-control" id="id_barang[]" name="id_barang[]">
           <option value="">select..</option>
           <?php foreach ($barang as $brg) : ?>
-            <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?></option>
-          <?php endforeach; ?>
+            <?php if ($brg->jumlah <= 10) : ?>
+              <option style="color:red" value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?> (stok: <?php echo $brg->jumlah; ?> )
+              <?php else : ?>
+              <option value="<?php echo $brg->id_barang; ?>"> <?php echo $brg->nama_barang; ?> (stok: <?php echo $brg->jumlah; ?> )
+              <?php endif; ?>
+            <?php endforeach; ?>
         </select>
       </div>
       <div class="col-sm-4">

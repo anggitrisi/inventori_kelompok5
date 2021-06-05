@@ -65,9 +65,9 @@
                     <!-- atau kalo sudah diterima dan sudah diproses tidak bisa lagi diproses-->
                     <div class="btn-group">
                       <?php if (($pgd->status == 0 || $pgd->status == 2)) : ?>
-                        <a href="#" class="btn btn-default disabled " style="width:110px>
+                        <a href="#" class="btn btn-default disabled " style="width:110px">
                           <span class=" icon text-white-50">
-                          <i class="fa  fa-check-square-o"></i>
+                            <i class="fa  fa-check-square-o"></i>
                           </span>
                           <span class="text">Selesaikan</span>
                         </a>
