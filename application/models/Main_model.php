@@ -664,5 +664,73 @@ class Main_model extends CI_Model
       $this->db->update('pengadaan', $atur);
   }
 
+  //===== Model Laporan Pengadaan dan Penempatan ======
+  public function p_detail_pengadaan($id_p)
+  {
+    $query = $this->db->select('mi.*,b.*')->from('masuk_item as mi, barang as b')
+      ->where('mi.id_barang = b.id_barang')
+      ->where($id_p)
+      ->get();
+    //echo $this->db->last_query();
+    return $query->result();
+  }
+
+  public function p_detail_penempatan($id_p)
+  {
+    $query = $this->db->select('kl.*,b.*')->from('keluar_item as kl, barang as b')
+      ->where('kl.id_barang = b.id_barang')
+      ->where($id_p)
+      ->get();
+    // $this->db->select()->from('lokasi as l, penempatan as pd')
+    //   ->where('l.id_lokasi = pd.id_lokasi')
+
+    return $query->result();
+  }
+  
+  
+
+  public function get_invoice_by_date1($start_date, $end_date)
+  {
+    $this->db->select('pengadaan.*', false);
+    // $this->db->select('sales_detail.*', false);
+    $this->db->from('pengadaan');
+    //$this->db->join('sales_detail', 'sales_detail.sales_no  =  sales.sales_no', 'left');
+    if ($start_date == $end_date) {
+      $this->db->like('pengadaan.tgl_permintaan', $start_date);
+    } else {
+      $this->db->where('pengadaan.tgl_permintaan >=', $start_date);
+      $this->db->where('pengadaan.tgl_permintaan <=', $end_date);
+    }
+    $query_result = $this->db->get();
+    $result = $query_result->result();
+
+    return $result;
+  }
+
+  public function get_invoice_by_date2($start_date, $end_date)
+  {
+    $this->db->select('penempatan.*', false);
+    // $this->db->select('sales_detail.*', false);
+    $this->db->from('penempatan');
+    //$this->db->join('sales_detail', 'sales_detail.sales_no  =  sales.sales_no', 'left');
+    if ($start_date == $end_date) {
+      $this->db->like('penempatan.tgl_permintaan_penempatan', $start_date);
+    } else {
+      $this->db->where('penempatan.tgl_permintaan_penempatan >=', $start_date);
+      $this->db->where('penempatan.tgl_permintaan_penempatan <=', $end_date);
+    }
+    $query_result = $this->db->get();
+    $result = $query_result->result();
+
+    return $result;
+  }
+  function bps_table($table, $pr_key)
+  {
+
+
+    $this->_table_name = $table;
+    $this->_primary_key = $pr_key;
+  }
+
 
 }
