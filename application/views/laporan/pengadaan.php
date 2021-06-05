@@ -54,7 +54,7 @@
                     <br>
                     <br>
                 <div id="printableArea">
-                    <link href="<?= base_url(); ?>assets/sales_laporan.css" rel="stylesheet" type="text/css">
+                    <link href="<?= base_url(); ?>assets/laporan.css" rel="stylesheet" type="text/css">
 
 
                     <div class="row ">
@@ -76,14 +76,14 @@
                                 $i = 1;
                                 foreach ($pengadaan as $pgd): ?>
                                    
-                                    <table  border="0" cellspacing="0" cellpadding="0">
+                                    <table border="0" cellspacing="0" cellpadding="0">
                                         <thead>
                                         <tr style="background-color: #ECECEC">
                                         <tr>
-                                        <th>No.</th>
-                                                    <th>Nama barang</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Harga</th>
+                                        <th>No</th>
+                                        <th>Nama barang</th>
+                                        <th>Jumlah</th>
+                        
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -93,10 +93,10 @@
                                                         <td><?= $k; ?></td>
                                                         <td><?= $pgd->nama_barang; ?></td>
                                                         <td><?= $pgd->jumlah_masuk; ?></td>
-                                                        <td><?= $pgd->harga; ?></td>
-                </tr>
-              <?php $i++;
-              endforeach; ?>
+
+                                            </tr>
+                                            <?php $i++;
+                                            endforeach; ?>
 
 
                                     </table>

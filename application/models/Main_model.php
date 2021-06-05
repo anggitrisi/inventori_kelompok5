@@ -677,14 +677,14 @@ class Main_model extends CI_Model
 
   public function p_detail_penempatan($id_p)
   {
-    $query = $this->db->select('kl.*,b.*')->from('keluar_item as kl, barang as b')
+    $query = $this->db->select('kl.*,b.*,l.*')->from('keluar_item as kl, barang as b, lokasi as l')
       ->where('kl.id_barang = b.id_barang')
+      ->where('kl.id_lokasi= l.id_lokasi')
       ->where($id_p)
       ->get();
-    // $this->db->select()->from('lokasi as l, penempatan as pd')
-    //   ->where('l.id_lokasi = pd.id_lokasi')
 
     return $query->result();
+  
   }
   
   
