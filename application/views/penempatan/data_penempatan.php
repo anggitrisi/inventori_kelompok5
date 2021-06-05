@@ -22,6 +22,7 @@
                 <th>Lokasi</th>
                 <th>Status</th>
                 <th>Aksi</th>
+                <th>Persetujuan</th>
               </tr>
             </thead>
             <tbody>
@@ -97,6 +98,38 @@
                     <?php if ($pgd->status == 1 && $pgd->_diselesaikan == 1) : ?>
                       <a href="<?= base_url() ?>penempatan/print_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-default"><i class=" fa fa-file"></i> </a>
                     <?php endif; ?>
+
+                        <!-- Aktion penyetujuan pemasukan pengeluaran -->
+                        <td>
+                        <?php if ($pgd->status == 0) : ?>
+                              <a class="btn btn-info" data-toggle="modal" href="#sign-modal1<?= $pgd->id_penempatan; ?>">
+                            <span class=" icon text-white-50">
+                              <i class="fa fa-thumbs-up"></i>
+                            </span>
+                          </a>
+
+                          <a data-toggle="modal" href="#sign-modal2<?= $pgd->id_penempatan; ?>" class="btn btn-danger">
+                            <span class=" icon text-white-50">
+                              <i class="fa fa-thumbs-down" ></i>
+                            </span>
+                            </a>
+
+                          <?php elseif ($pgd->status == 1) : ?>
+                              <a href="#<?= $pgd->id_penempatan; ?>" class="btn btn-info" data-toggle="tooltip" disabled="disabled">
+                            <span class=" icon text-white-50">
+                              <i class="fa fa-thumbs-up"></i>
+                            </span>
+                          </a>
+                          
+                          <?php elseif ($pgd->status == 2) :  ?>
+                            <a href="#<?= $pgd->id_penempatan; ?>" class="btn btn-danger" data-toggle="tooltip" disabled="disabled">
+                            <span class=" icon text-white-50">
+                              <i class="fa fa-thumbs-down" ></i>
+                            </span>
+                          </a>
+                          <?php endif; ?>
+
+
                     <!-- Modal Hapus-->
                     <div class="modal fade" id="deletepenempatan<?= $pgd->id_penempatan; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteBusLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -136,3 +169,65 @@
   <!-- /.col -->
 </div>
 <!-- page end-->
+
+
+
+<!-- Modal Nerima -->
+<?php foreach ($penempatan as $rows): ?>
+
+<div class="modal fade" id="sign-modal1<?php echo $rows->id_penempatan; ?>" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Tanda Tangan Untuk Menerima Penempatan</h4>
+            </div>
+           
+            <div class="modal-body">
+            <img src="<?php echo base_url($sig['img']); ?>" alt=""> 
+            </div>
+            <br>
+            <div class="modal-footer">
+           
+             
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"></i>Cancel</button>
+             <a href="<?= base_url('Penempatan/nerima_penempatan/' . $rows->id_penempatan); ?>"> 
+             <button type="button"  class="btn btn-primary"  onclick="return confirm('Anda yakin ingin meneriman penempatan ini?')"><i class="fa fa-check"></i>Save</button> 
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<?php endforeach; ?>
+
+
+<!-- Modal Tolak -->
+<?php foreach ($penempatan as $rows1): ?>
+<div class="modal fade" id="sign-modal2<?php echo $rows1->id_penempatan; ?>" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" style="color:#FF0000;">Tanda Tangan Untuk Menolak Penempatan</h4>
+            </div>
+           
+            <div class="modal-body">
+            <img src="<?php echo base_url($sig['img']); ?>" alt=""> 
+            </div>
+            <br>
+            <div class="modal-footer">
+           
+              
+             <button type="button" class="btn btn-secondary" data-dismiss="modal"></i>Cancel</button>
+             <a href="<?= base_url('Penempatan/tolak_penempatan/' . $rows1->id_penempatan); ?>">
+             <button type="button"  class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak penempatan ini?')"><i class="fa fa-check" ></i> Save</button> 
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<?php endforeach; ?>

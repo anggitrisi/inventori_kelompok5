@@ -19,6 +19,7 @@ class Pengadaan extends MY_Controller
 
   public function data_pengadaan()
   {
+    $data['sig'] = $this->Main_model->get_sig($this->session->userdata('id'));
     $data['pengadaan'] = $this->Main_model->get_pengadaan();   //pengadaan join
     $data['barang'] = $this->Main_model->select_record('barang');
 
@@ -331,4 +332,31 @@ keterangan_diselesaikan : saat petugas menyetujui_diselesaikan = 1, lalu data ba
       $margin = 2
     );
   }
+
+  
+  public function nerima_pengadaan($id)
+    {
+      // $data = array(
+      //   'status' => 1,
+      //   'tgl_disetujui' => date("Y-m-d H:i:s"),
+      //   'disetujui_oleh' =>  $this->session->userdata('user_id'),
+      // );
+      // $where = array('id_pengadaan' => $id);
+      // $this->session->set_flashdata('success', 'Nerima Pengadaan');
+
+      // redirect(base_url() . 'Pengadaan/data_pengadaan');
+      
+      $status = 1;
+      $this->Main_model->ubahaktifpengadaan($id, $status);
+      redirect(base_url() . 'Pengadaan/data_pengadaan');
+    }
+
+  public function tolak_pengadaan($id)
+  {
+    
+    $status = 2;
+    $this->Main_model->ubahaktifpengadaan($id, $status);
+    redirect(base_url() . 'Pengadaan/data_pengadaan');
+  }
+
 }
