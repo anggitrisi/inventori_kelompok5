@@ -6,9 +6,13 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data Lokasi | <a href='<?= base_url(); ?>Lokasi/tambah_lokasi' class='btn btn-info'>
+                <h3 class="box-title">Data Lokasi | 
+                <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
+                <a href='<?= base_url(); ?>Lokasi/tambah_lokasi' class='btn btn-info'>
                         Tambah Lokasi <i class="fa fa-plus"></i>
-                    </a></h3>
+                    </a>
+                <?php endif; ?>
+                    </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -19,7 +23,7 @@
                                 <th>No</th>
                                 <th>Nama Lokasi</th>
                                 <th>Fakultas</th>
-                                <th>Aksi<?th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,10 +35,15 @@
                                     <td><?= $lks->nama_lokasi; ?></td>
                                     <td><?= $lks->fakultas; ?></td>
 
+                                    <?php if ($this->session->userdata('group_id') == '2'): ?>
+                                    <td><a href="<?= base_url() ?>lokasi/detail_lokasi/<?= $lks->id_lokasi; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a></td>
+                                    <?php endif;?>
+
+                                    <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
                                     <td><a href="<?= base_url() ?>lokasi/edit_lokasi/<?= $lks->id_lokasi; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                         <a data-toggle="modal" href="#deletelokasi<?= $lks->id_lokasi; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus lokasi"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>lokasi/detail_lokasi/<?= $lks->id_lokasi; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
-
+                                    <?php endif;?>
 
                                         <!-- Modal Hapus-->
                                         <div class="modal fade" id="deletelokasi<?= $lks->id_lokasi; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteBusLabel" aria-hidden="true">

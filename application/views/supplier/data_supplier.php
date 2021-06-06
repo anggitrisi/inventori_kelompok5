@@ -6,9 +6,13 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data supplier | <a href='<?= base_url(); ?>Supplier/tambah_supplier' class='btn btn-info'>
+                <h3 class="box-title">Data supplier | 
+                <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
+                <a href='<?= base_url(); ?>Supplier/tambah_supplier' class='btn btn-info'>
                         Tambah supplier <i class="fa fa-plus"></i>
-                    </a></h3>
+                    </a>
+                    <?php endif; ?>
+                    </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -37,6 +41,11 @@
                                     <td><?= $spl->no_telp; ?></td>
                                     <td><?= $spl->alamat; ?></td>
 
+                                    <?php if ($this->session->userdata('group_id') == '2'): ?>
+                                    <td><a href="<?= base_url() ?>Supplier/detail_supplier/<?= $spl->id_supplier; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a></td>
+                                    <?php endif; ?>
+
+                                    <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
                                     <td><a href="<?= base_url() ?>Supplier/edit_supplier/<?= $spl->id_supplier; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                         <a data-toggle="modal" href="#deletesupplier<?= $spl->id_supplier; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus supplier"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>Supplier/detail_supplier/<?= $spl->id_supplier; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
@@ -55,6 +64,7 @@
                                                 </span>
                                                 <span class="text">Nonaktifkan</span>
                                             </a>
+                                        <?php endif; ?>
                                         <?php endif; ?>
 
                                         <!-- Modal Hapus-->

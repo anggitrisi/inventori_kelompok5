@@ -6,9 +6,13 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Data Pengadaan | <a href='<?= base_url(); ?>Pengadaan/tambah_pengadaan' class='btn btn-info'>
+        <h3 class="box-title">Data Pengadaan | 
+        <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
+        <a href='<?= base_url(); ?>Pengadaan/tambah_pengadaan' class='btn btn-info'>
             Permohonan Pengadaan <i class="fa fa-plus"></i>
-          </a></h3>
+          </a>
+          <?php endif; ?>
+          </h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -24,7 +28,9 @@
                 <th>Diminta oleh</th>
                 <th>Status</th>
                 <th width="120px">Aksi</th>
+                <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '2'): ?>      
                 <th>Persetujuan</th>
+                <?php endif; ?>
 
               </tr>
             </thead>
@@ -67,13 +73,19 @@
                     <?php endif; ?>
                   </td>
 
+                   <?php if ($this->session->userdata('group_id') == '2'): ?>
+                  <td><a href="<?= base_url() ?>Pengadaan/detail_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a></td>
+                    <?php endif; ?>
+
+                  <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
                   <td>
                     <a href="<?= base_url() ?>pengadaan/edit_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                     <a href="<?= base_url() ?>Pengadaan/detail_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
                     <a data-toggle="modal" href="#deletePengadaan<?= $pgd->id_pengadaan; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pengadaan"><i class="fa fa-trash"></i></a>
-
+                    <?php  endif;?>
                        <!-- Aktion penyetujuan pemasukan pengeluaran -->
                    
+                  <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '2'): ?>
                    <td>
                    <?php if ($pgd->status == 0) : ?>
 				          	<a class="btn btn-info" data-toggle="modal"  href="#sign-modal1<?= $pgd->id_pengadaan; ?>">
@@ -104,6 +116,8 @@
                         </span>
                       </a>
                       <?php endif; ?>
+                      <?php endif; ?>
+                  
                       
 
 

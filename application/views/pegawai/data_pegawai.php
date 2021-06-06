@@ -6,9 +6,13 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data Pegawai | <a href='<?= base_url(); ?>Pegawai/tambah_pegawai' class='btn btn-info'>
+                <h3 class="box-title">Data Pegawai | 
+                <?php if ($this->session->userdata('group_id') == '1'): ?>
+                <a href='<?= base_url(); ?>Pegawai/tambah_pegawai' class='btn btn-info'>
                         Tambah Pegawai <i class="fa fa-plus"></i>
-                    </a></h3>
+                    </a>
+                <?php endif; ?>
+                </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -23,6 +27,7 @@
                                 <th>Alamat</th>
                                 <th>Jenis Kelamin</th>
                                 <th width="220px">Aksi</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -41,8 +46,14 @@
                                     <?php else : ?>
                                         <td><?php echo "Laki-laki"; ?></td>
                                     <?php endif; ?>
+
+                                    <?php if ($this->session->userdata('group_id') == '2' || $this->session->userdata('group_id') == '3'): ?>
+                                    <td><a href="<?= base_url() ?>Pegawai/detail_pegawai/<?= $pgw->EMP_ID; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a></td>
+                                    <?php endif; ?>
+
+                                    <?php if ($this->session->userdata('group_id') == '1'): ?>
                                     <td><a href="<?= base_url() ?>Pegawai/edit_pegawai/<?= $pgw->EMP_ID; ?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a data-toggle="modal" href="#deletePegawai<?= $pgw->EMP_ID; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pegawai"><i class="fa fa-trash"></i></a>
+                                    <a data-toggle="modal" href="#deletePegawai<?= $pgw->EMP_ID; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pegawai"><i class="fa fa-trash"></i></a>
                                         <a href="<?= base_url() ?>Pegawai/detail_pegawai/<?= $pgw->EMP_ID; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
                                         <?php if ($pgw->STATUS == 0) : ?>
                                             <a href="<?= base_url(); ?>Pegawai/aktifkan_pegawai/<?= $pgw->EMP_ID; ?>" class="btn btn-success ">
@@ -59,6 +70,7 @@
                                                 </span>
                                                 <span class="text">Nonaktifkan</span>
                                             </a>
+                                        <?php endif; ?>
                                         <?php endif; ?>
 
                                         <!-- Modal Hapus-->

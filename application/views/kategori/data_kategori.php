@@ -13,9 +13,12 @@
         <div class="box">
             <div class="box-header">
 
-                <h3 class="box-title">Data Kategori | <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah_data">
+                <h3 class="box-title">Data Kategori | 
+                <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah_data">
                         Tambah Kategori <i class="fa fa-plus"></i>
                     </button>
+                    <?php endif; ?>
                     </a></h3>
             </div>
             <!-- /.box-header -->
@@ -26,7 +29,9 @@
                             <tr>
                                 <th>Id kategori</th>
                                 <th>Nama Kategori</th>
+                                <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
                                 <th>Aksi</th>
+                                <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,9 +41,10 @@
 
                                     <td><?= $i; ?></td>
                                     <td><?= $ktg->nama_kategori; ?></td>
+                                    <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
                                     <td><a href="#editKategori<?= $ktg->id_kategori; ?>" data-toggle='modal' class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                         <a data-toggle="modal" href="#deleteKategori<?= $ktg->id_kategori; ?>" data-url="" class="btn btn-danger confirm_delete" title="Hapus" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Hapus Pegawai"><i class="fa fa-trash"></i></a>
-
+                                        <?php endif; ?>
                                         <!-- Modal Hapus-->
                                         <div class="modal fade" id="deleteKategori<?= $ktg->id_kategori; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteBusLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
