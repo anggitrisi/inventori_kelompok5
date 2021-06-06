@@ -283,7 +283,6 @@
 
 
 </div>
-<!-- /.row -->
 
 <div class="row">
   <div class="col-lg-8">
@@ -308,7 +307,7 @@
                       </font>
                     </span> <span class="time">
                     </span></td>
-                  <td><a href="#"><?= $pd->nama_barang; ?></a></td>\
+                  <td><a href="#"><?= $pd->nama_barang; ?></a></td>
                 </tr>
               <?php else : ?>
                 <tr>

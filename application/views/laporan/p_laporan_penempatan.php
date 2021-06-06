@@ -80,6 +80,7 @@
                                     $total_profit = 0;
                                     $p = 0;
                                     ?>
+
                                     <?php if (!empty($invoice_details)): foreach ($invoice_details as $id_penempatan => $penempatan) : ?>
                                         <table>
                                             <thead>
@@ -110,19 +111,40 @@
                                                         <td class="desc text-center"><?= $ppt->nama_barang; ?></td>
                                                         <td class="qty text-center"><?= $ppt->jumlah_keluar; ?></td>
                                                        
+
                                                     </tr>
+                                                </thead>
+                                            </table>
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <thead>
+                                                    <tr style="background-color: #ECECEC">
+                                                        <th>No.</th>
+                                                        <th>Nama barang</th>
+                                                        <th>Jumlah</th>
 
-                                                    <?php $k++ ?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $k = 1 ?>
+                                                    <?php foreach ($penempatan as $ppt) : ?>
+                                                        <tr>
+                                                            <td><?= $k; ?></td>
+                                                            <td><?= $ppt->nama_barang; ?></td>
+                                                            <td><?= $ppt->jumlah_keluar; ?></td>
+
+                                                        </tr>
+
+                                                        <?php $k++ ?>
 
 
-                                                <?php
-                                                endforeach;
-                                                ?>
+                                                    <?php
+                                                    endforeach;
+                                                    ?>
 
 
-                                            </tbody>
+                                                </tbody>
 
-                                            <tfoot>
+                                                <tfoot>
 
                                                 <tr> 
                                                 <td colspan="1">Nama Lokasi : </td>

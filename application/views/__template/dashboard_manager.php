@@ -1,6 +1,6 @@
 <div class="row">
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-olive">
       <div class="inner">
@@ -15,7 +15,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
@@ -30,7 +30,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-lime">
       <div class="inner">
@@ -236,7 +236,7 @@
                       </font>
                     </span> <span class="time">
                     </span></td>
-                  <td><a href="#"><?= $pd->nama_barang; ?></a></td>\
+                  <td><a href="#"><?= $pd->nama_barang; ?></a></td>
                 </tr>
               <?php else : ?>
                 <tr>
@@ -291,8 +291,6 @@
       </div>
       <!-- /.info-box-content -->
     </div>
-
-
   </div>
   <!-- /.col -->
 </div>

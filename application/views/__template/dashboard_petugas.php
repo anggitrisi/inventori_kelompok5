@@ -1,20 +1,6 @@
 <div class="row">
-  <div class="col-lg-3">
-    <!-- small box -->
-    <div class="small-box bg-orange">
-      <div class="inner">
-        <h3><?= $total_users; ?></h3>
-
-        <p>Jumlah User</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-android-contacts"></i>
-      </div>
-      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-    </div>
-  </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-olive">
       <div class="inner">
@@ -29,7 +15,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
@@ -44,7 +30,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-lime">
       <div class="inner">
@@ -276,7 +262,7 @@
                       </font>
                     </span> <span class="time">
                     </span></td>
-                  <td><a href="#"><?= $pd->nama_barang; ?></a></td>\
+                  <td><a href="#"><?= $pd->nama_barang; ?></a></td>
                 </tr>
               <?php else : ?>
                 <tr>
@@ -298,40 +284,41 @@
   </div>
 
   <div class="col md-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box bg-olive">
+      <span class="info-box-icon"><i class="glyphicon glyphicon-download"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">Total Jumlah Barang Masuk</span>
+        <span class="info-box-number"><?= $jumlah_barang_masuk; ?></span>
+
+        <div class="progress">
+          <div class="progress-bar" style="width: 100%"></div>
+        </div>
+        <span class="progress-description">
+          <?= $jumlah_barang_masuk_bulan_ini; ?> barang masuk bulan ini
+        </span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
     <!-- Info Boxes Style 2 -->
     <div class="info-box bg-maroon">
       <span class="info-box-icon"><i class="glyphicon glyphicon-upload"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Jumlah Barang Keluar</span>
-        <span class="info-box-number">....</span>
+        <span class="info-box-text">Total Jumlah Barang Keluar</span>
+        <span class="info-box-number"><?= $jumlah_barang_keluar; ?></span>
 
         <div class="progress">
-          <div class="progress-bar" style="width: 50%"></div>
+          <div class="progress-bar" style="width: 100%"></div>
         </div>
         <span class="progress-description">
-          .. barang keluar bulan ini
+          <?= $jumlah_barang_keluar_bulan_ini; ?> barang keluar bulan ini
         </span>
       </div>
       <!-- /.info-box-content -->
     </div>
 
-    <div class="info-box bg-olive">
-      <span class="info-box-icon"><i class="glyphicon glyphicon-download"></i></span>
 
-      <div class="info-box-content">
-        <span class="info-box-text">Jumlah Barang Keluar</span>
-        <span class="info-box-number">....</span>
-
-        <div class="progress">
-          <div class="progress-bar" style="width: 70%"></div>
-        </div>
-        <span class="progress-description">
-          ... barang keluar bulan ini
-        </span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
   </div>
   <!-- /.col -->
 </div>
