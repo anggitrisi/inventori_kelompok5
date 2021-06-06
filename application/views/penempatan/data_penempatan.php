@@ -6,9 +6,14 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Data penempatan | <a href='<?= base_url(); ?>penempatan/tambah_penempatan' class='btn btn-info'>
+        <h3 class="box-title">Data penempatan | 
+        <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
+        <a href='<?= base_url(); ?>penempatan/tambah_penempatan' class='btn btn-info'>
             Permohonan penempatan <i class="fa fa-plus"></i>
-          </a></h3>
+          </a>
+          <?php endif;?>
+          </td>
+          </h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -22,7 +27,10 @@
                 <th>Lokasi</th>
                 <th>Status</th>
                 <th>Aksi</th>
+
+                <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '2'): ?>
                 <th>Persetujuan</th>
+                <?php endif; ?>
               </tr>
             </thead>
             <tbody>
@@ -59,7 +67,13 @@
                       </a>
                     <?php endif; ?>
                   </td>
-
+                  
+                  <?php if ($this->session->userdata('group_id') == '2'): ?>
+                  <td>
+                    <a href="<?= base_url() ?>penempatan/detail_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a></td>
+                  <?php endif; ?>
+                  
+                  <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>
                   <td>
                     <!-- kalau belum diterima atau ditolak manager tidak bisa diproses-->
                     <!-- atau kalo sudah diterima dan sudah diproses tidak bisa lagi diproses-->
@@ -89,6 +103,7 @@
                         </a>
                       <?php endif; ?>
                     </div>
+                   
 
                     <!-- kalau status masih waiting -->
                     <a href="<?= base_url() ?>penempatan/detail_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-primary"><i class=" fa fa-eye"></i> </a>
@@ -98,7 +113,9 @@
                     <?php if ($pgd->status == 1 && $pgd->_diselesaikan == 1) : ?>
                       <a href="<?= base_url() ?>penempatan/print_penempatan/<?= $pgd->id_penempatan; ?>" class="btn btn-default"><i class=" fa fa-file"></i> </a>
                     <?php endif; ?>
+                    <?php endif;?>
 
+                    <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '2'): ?>
                         <!-- Aktion penyetujuan pemasukan pengeluaran -->
                         <td>
                         <?php if ($pgd->status == 0) : ?>
@@ -128,7 +145,7 @@
                             </span>
                           </a>
                           <?php endif; ?>
-
+                          <?php endif;?>
 
                     <!-- Modal Hapus-->
                     <div class="modal fade" id="deletepenempatan<?= $pgd->id_penempatan; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteBusLabel" aria-hidden="true">

@@ -35,6 +35,9 @@
                   <td><?= $pgd->nama_perusahaan; ?></td>
                   <td><?= $pgd->total_harga; ?></td>
                   <td><?= $pgd->nama_petugas; ?></td>
+
+                
+                 
                   <td><?php if ($pgd->_dibayar == 0) : ?>
                       <span class="label label-warning">
                         <span class="icon text-white-50">
@@ -48,7 +51,9 @@
                       </span>
                     <?php endif; ?>
                   </td>
+                  </td>
 
+                   <?php if ($this->session->userdata('group_id') == '1' || $this->session->userdata('group_id') == '3'): ?>                 
                   <td>
                     <!-- kalau sudah dibayar tidak bisa dibayar lagi-->
                     <?php if ($pgd->_dibayar == 1) : ?>
@@ -64,10 +69,17 @@
                         <span class=" icon text-white-50">
                           <i class="fa  fa-usd"></i>
                         </span>
-                      </a>
+                      </a></td>
                     <?php endif; ?>
+                    
+
                     <!-- kalau status masih waiting -->
                     <a href="<?= base_url() ?>Pengadaan/detail_invoice_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-default"><i class=" fa fa-file"></i> </a>
+                    <?php endif;?>
+
+                    <?php if ($this->session->userdata('group_id') == '2'): ?>
+                    <td><a href="<?= base_url() ?>Pengadaan/detail_invoice_pengadaan/<?= $pgd->id_pengadaan; ?>" class="btn btn-default"><i class=" fa fa-file"></i> </a></td>
+                    <?php endif;?>
                 </tr>
               <?php $i++;
               endforeach; ?>

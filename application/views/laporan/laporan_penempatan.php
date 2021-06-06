@@ -20,32 +20,9 @@
                 </div>
 
                 <br>
-                <br>
+                <main class="invoice_laporan">
 
-                <div id="printableArea">
-                    <link href="<?= base_url(); ?>assets/sales_report.css" rel="stylesheet" type="text/css">
-
-
-                    <div class="row ">
-                        <div class="col-md-8 col-md-offset-2">
-
-                            <header class="clearfix">
-                                <div id="logo">
-                                    <img src="<?= base_url() ?>assets/logo.png">
-                                </div>
-                                <div id="company">
-                                    <h2 class="name">BEB 300</h2>
-                                    <div>Company Phone</div>
-                                    <div>ceo@beb300.com</div>
-                                </div>
-
-                            </header>
-                            <hr>
-
-                            <main class="invoice_report">
-
-                                <h4>Laporan Penempatan from: <strong><?= $start; ?></strong> to
-                                    <strong><?= $end; ?></strong>
+                                <h4> Laporan penempatan from: <strong><?= $start; ?></strong> to <strong><?= $end; ?></strong>
                                 </h4>
                                 <br>
                                 <br>
@@ -66,14 +43,15 @@
                                             </thead>
                                             <tbody>
                                                 <?php $k = 1 ?>
-                                                <?php foreach ($penempatan as $ppt) : ?>
-                                                    <tr>
-                                                        <td><?= $k; ?></td>
-                                                        <td><?= $ppt->nama_barang; ?></td>
-                                                        <td><?= $ppt->jumlah_keluar; ?></td>
-                                        </tr>
+                                                    <?php foreach ($penempatan as $ppt) : ?>
+                                                        <tr>
+                                                            <td><?= $k; ?></td>
+                                                            <td><?= $ppt->nama_barang; ?></td>
+                                                            <td><?= $ppt->jumlah_keluar; ?></td>
 
-                                        </tbody>
+                                                                </tr>
+                                                            <?php $i++;
+                                                            endforeach; ?>
 
 
                                     </table>
@@ -81,8 +59,19 @@
 
                             </main>
                             <hr>
+                <br>
+
+                <div id="printableArea">
+                    <link href="<?= base_url(); ?>assets/laporan.css" rel="stylesheet" type="text/css">
+
+
+                    <div class="row ">
+                        <div class="col-md-8 col-md-offset-2">
+
+                          
+                            <hr>
                             <footer class="text-center">
-                            <strong>Kelompok 5</strong>&nbsp;&nbsp;&nbsp;Sistem Inventaris kelompok 5
+                                <strong>Kelompok 5</strong>&nbsp;&nbsp;&nbsp;Sistem Inventaris kelompok 5
                             </footer>
 
 

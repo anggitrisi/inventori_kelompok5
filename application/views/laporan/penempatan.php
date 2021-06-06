@@ -54,7 +54,7 @@
                     <br>
                     <br>
                 <div id="printableArea">
-                    <link href="<?= base_url(); ?>assets/sales_laporan.css" rel="stylesheet" type="text/css">
+                    <link href="<?= base_url(); ?>assets/laporan.css" rel="stylesheet" type="text/css">
 
 
                     <div class="row ">
@@ -88,15 +88,15 @@
                                             </thead>
                                             <tbody>
                                                 <?php $k = 1 ?>
-                                                <?php foreach ($penempatan as $ppt) : ?>
-                                                    <tr>
-                                                        <td><?= $k; ?></td>
-                                                        <td><?= $ppt->nama_barang; ?></td>
-                                                        <td><?= $ppt->jumlah_keluar; ?></td>
+                                                    <?php foreach ($penempatan as $ppt) : ?>
+                                                        <tr>
+                                                            <td><?= $k; ?></td>
+                                                            <td><?= $ppt->nama_barang; ?></td>
+                                                            <td><?= $ppt->jumlah_keluar; ?></td>
 
-                </tr>
-              <?php $i++;
-              endforeach; ?>
+                                                                </tr>
+                                                            <?php $i++;
+                                                            endforeach; ?>
 
 
                                     </table>
